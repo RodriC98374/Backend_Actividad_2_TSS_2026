@@ -8,11 +8,11 @@ Laravel 13 / PHP 8.4 / PostgreSQL 17. API para importación XLSX/CSV, captura de
 ## Obtener esta versión
 
 ```powershell
-git clone --branch codex/backend-v1 https://github.com/RodriC98374/Backend_Actividad_2_TSS_2026.git
+git clone --branch backend-v1 https://github.com/RodriC98374/Backend_Actividad_2_TSS_2026.git
 cd Backend_Actividad_2_TSS_2026
 ```
 
-La rama `codex/backend-v1` contiene el avance para integración. Frontend puede comenzar con el contrato OpenAPI 1.0.0 (37 operaciones). Estado verificado: 15 pruebas sobre PostgreSQL, formato PHP correcto y validación de OpenAPI; falta contrastar con el Excel institucional real.
+La rama `backend-v1` contiene el avance para integración. Frontend puede comenzar con el contrato OpenAPI 1.0.0 (37 operaciones). Estado verificado: 15 pruebas sobre PostgreSQL, formato PHP correcto y validación de OpenAPI; falta contrastar con el Excel institucional real.
 
 ## Arranque con Docker
 
