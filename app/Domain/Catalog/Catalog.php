@@ -2,11 +2,16 @@
 
 namespace App\Domain\Catalog;
 
+use App\Models\FieldDefinition;
+use App\Models\SchemaVersion;
+use App\Models\SurveySchema;
 use App\Support\ApiProblem;
 use Illuminate\Support\Str;
 
 class Catalog
 {
+    private array $snapshots = [];
+
     public function version(?string $version = null): string
     {
         $version ??= config('surveys.dictionary_version');
@@ -23,9 +28,14 @@ class Catalog
             throw new ApiProblem('invalid_survey_type', 'Tipo de encuesta no válido.');
         }
         $version = $this->version($version);
-        $all = json_decode(file_get_contents(config_path('survey-catalog.json')), true, flags: JSON_THROW_ON_ERROR);
+        $key = $survey.':'.$version;
+        if (isset($this->snapshots[$key])) {
+            return $this->snapshots[$key];
+        }
+        $schema = SurveySchema::where('legacy_survey_type', $survey)->firstOrFail();
+        $snapshot = SchemaVersion::where('schema_id', $schema->id)->where('legacy_dictionary_version', $version)->where('status', 'published')->firstOrFail();
 
-        return array_values(array_filter($all, fn ($f) => $f['survey_type'] === $survey && ($version !== config('surveys.legacy_version') || ! str_starts_with($f['id'], 'X'))));
+        return $this->snapshots[$key] = FieldDefinition::where('schema_version_id', $snapshot->id)->orderBy('legacy_position')->get()->map(fn ($field) => $field->legacy_payload)->all();
     }
 
     public function field(string $survey, string $id, ?string $version = null): array

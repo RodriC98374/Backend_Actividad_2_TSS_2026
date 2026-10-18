@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Imports\ImportService;
+use App\Domain\Imports\SheetAssessment;
 use App\Domain\Surveys\ResponseWriter;
 use App\Models\ImportSheet;
 use App\Models\PreparedRow;
-use App\Models\QualityIssue;
 use App\Models\RawRow;
 use App\Models\RowDecision;
 use App\Models\SurveyImport;
@@ -45,6 +45,15 @@ class ImportController extends Controller
         return Api::page(RawRow::where('import_sheet_id', $s->id)->orderBy('row_number'), $r);
     }
 
+    public function assessment(Request $r, SurveyImport $import, string $sheet, SheetAssessment $assessment)
+    {
+        Api::contacts($r);
+        $s = $this->service->sheet($import, $sheet);
+        $v = $r->validate(['survey_type' => 'required|in:titulados,empleadores', 'header_row' => 'sometimes|integer|min:1|max:'.max(1, $s->row_count)]);
+
+        return Api::data($assessment->assess($s, $v['survey_type'], isset($v['header_row']) ? (int) $v['header_row'] : null));
+    }
+
     public function configure(Request $r, SurveyImport $import, string $sheet)
     {
         Api::contacts($r);
@@ -80,10 +89,10 @@ class ImportController extends Controller
 
     public function issues(Request $r, SurveyImport $import)
     {
-        $v = $r->validate(['validation_run_id' => 'required|uuid']);
+        $v = $r->validate(['validation_run_id' => 'required|uuid'] + ImportReviewController::filterRules());
         ValidationRun::where('import_id', $import->id)->findOrFail($v['validation_run_id']);
 
-        return Api::page(QualityIssue::where('validation_run_id', $v['validation_run_id'])->orderBy('id'), $r);
+        return Api::page(ImportReviewController::filteredIssues($v['validation_run_id'], $v)->orderBy('id'), $r);
     }
 
     public function decisions(Request $r, SurveyImport $import)

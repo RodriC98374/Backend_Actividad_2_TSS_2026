@@ -7,8 +7,10 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\ImportReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\SchemaController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -22,6 +24,17 @@ Route::prefix('v1')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout']);
         Route::get('capabilities', [CatalogController::class, 'capabilities']);
         Route::get('catalog', [CatalogController::class, 'index']);
+        Route::get('schemas', [SchemaController::class, 'index']);
+        Route::post('schemas', [SchemaController::class, 'store']);
+        Route::get('schemas/{schema}/versions', [SchemaController::class, 'versions']);
+        Route::post('schemas/{schema}/versions', [SchemaController::class, 'createVersion']);
+        Route::get('schema-versions/{version}', [SchemaController::class, 'show']);
+        Route::get('schema-versions/{version}/fields', [SchemaController::class, 'fields']);
+        Route::put('schema-versions/{version}/fields', [SchemaController::class, 'edit']);
+        Route::delete('schema-versions/{version}/fields/{definition}', [SchemaController::class, 'remove']);
+        Route::post('schema-versions/{version}/publish', [SchemaController::class, 'publish']);
+        Route::get('datasets/{dataset}/schema-bindings', [SchemaController::class, 'bindings']);
+        Route::post('datasets/{dataset}/schema-bindings', [SchemaController::class, 'bind']);
         Route::get('datasets', [DatasetController::class, 'index']);
         Route::post('datasets', [DatasetController::class, 'store']);
         Route::get('datasets/{dataset}', [DatasetController::class, 'show']);
@@ -35,10 +48,13 @@ Route::prefix('v1')->group(function () {
         Route::post('imports', [ImportController::class, 'store']);
         Route::get('imports/{import}', [ImportController::class, 'show']);
         Route::get('imports/{import}/sheets/{sheet}/preview', [ImportController::class, 'preview']);
+        Route::get('imports/{import}/sheets/{sheet}/assessment', [ImportController::class, 'assessment']);
         Route::put('imports/{import}/sheets/{sheet}', [ImportController::class, 'configure']);
         Route::post('imports/{import}/validate', [ImportController::class, 'validateImport']);
         Route::get('imports/{import}/validations/{validation}/rows', [ImportController::class, 'prepared']);
         Route::get('imports/{import}/issues', [ImportController::class, 'issues']);
+        Route::get('imports/{import}/review-summary', [ImportReviewController::class, 'summary']);
+        Route::post('imports/{import}/review-exclusions', [ImportReviewController::class, 'exclude']);
         Route::post('imports/{import}/row-decisions', [ImportController::class, 'decisions']);
         Route::post('imports/{import}/commit', [ImportController::class, 'commit']);
         Route::get('datasets/{dataset}/responses', [ResponseController::class, 'index']);

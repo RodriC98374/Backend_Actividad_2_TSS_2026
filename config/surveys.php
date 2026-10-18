@@ -4,6 +4,7 @@ return [
     'dictionary_version' => 'umss-hibrido-v1',
     'legacy_version' => 'umss-encuestas-2026-10-10',
     'questionnaire_version' => 'academico-titulados-v1',
+    'max_schema_fields' => (int) env('SCHEMA_MAX_FIELDS', 1000),
     'max_file_kb' => (int) env('IMPORT_MAX_FILE_KB', 10240),
     'max_rows' => (int) env('IMPORT_MAX_ROWS', 10000),
     'max_columns' => (int) env('IMPORT_MAX_COLUMNS', 200),
