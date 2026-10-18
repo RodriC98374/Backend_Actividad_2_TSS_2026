@@ -1,0 +1,170 @@
+@base = http://localhost:8000/api/v1
+@token = REEMPLAZAR_TOKEN_ADMIN
+@dataset = REEMPLAZAR_UUID_ESTUDIO
+@import = REEMPLAZAR_UUID_IMPORTACION
+@sheet = REEMPLAZAR_UUID_HOJA
+@validation = REEMPLAZAR_UUID_VALIDACION
+@schema = REEMPLAZAR_UUID_ESQUEMA
+@schemaVersion = REEMPLAZAR_UUID_VERSION
+
+### Crear esquema de variables (solo registro en este bloque)
+POST {{base}}/schemas
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"name":"Encuesta configurable","description":"Variables definidas por el administrador"}
+
+### Crear borrador vacío
+POST {{base}}/schemas/{{schema}}/versions
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+### Guardar lote de variables (no elimina campos omitidos)
+PUT {{base}}/schema-versions/{{schemaVersion}}/fields
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expected_revision":1,"fields":[{"code":"EDAD","label":"Edad al responder","type":"number","unit":"years","required":true,"sensitive":false,"options":[]},{"code":"EMPLEO","label":"Tiene empleo","type":"boolean","required":false,"sensitive":false,"options":[]}]}
+
+### Consultar variables paginadas
+GET {{base}}/schema-versions/{{schemaVersion}}/fields?per_page=50&page=1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Publicar la versión revisada (queda inmutable)
+POST {{base}}/schema-versions/{{schemaVersion}}/publish
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expected_revision":2}
+
+### Asociar versión publicada a estudio (todavía no habilita importación dinámica)
+POST {{base}}/datasets/{{dataset}}/schema-bindings
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"schema_version_id":"{{schemaVersion}}"}
+
+### Revisar grupo sin descargar todas sus filas
+GET {{base}}/imports/{{import}}/review-summary?validation_run_id={{validation}}&code=invalid_value&field_id=T12
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Excluir grupo después de revisar su conteo (ajustar revisión y número exacto)
+POST {{base}}/imports/{{import}}/review-exclusions
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"validation_run_id":"{{validation}}","expected_configuration_revision":2,"expected_affected_rows":25,"selection":{"code":"invalid_value","field_id":"T12"},"reason":"Excluir grupo revisado por valores no interpretables"}
+
+### Login (usar la cuenta creada con app:create-admin)
+POST {{base}}/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{"email":"admin@example.test","password":"REEMPLAZAR_CONTRASENA"}
+
+### Crear estudio
+POST {{base}}/datasets
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"name":"Seguimiento titulados 2026","reference_period":"2026"}
+
+### Catálogo de preguntas y códigos
+GET {{base}}/catalog?survey_type=titulados
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Subir CSV sintético de dos preguntas (requiere permiso de contactos)
+POST {{base}}/imports
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=umss-example
+
+--umss-example
+Content-Disposition: form-data; name="dataset_id"
+
+{{dataset}}
+--umss-example
+Content-Disposition: form-data; name="csv_delimiter"
+
+,
+--umss-example
+Content-Disposition: form-data; name="file"; filename="ejemplo.csv"
+Content-Type: text/csv
+
+Estudio,Trabajo
+Sí,No
+No,Sí
+--umss-example--
+
+### Evaluar posibles encabezados (usar import y sheet devueltos al subir)
+GET {{base}}/imports/{{import}}/sheets/{{sheet}}/assessment?survey_type=titulados
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Perfilar columnas después de elegir encabezado
+GET {{base}}/imports/{{import}}/sheets/{{sheet}}/assessment?survey_type=titulados&header_row=1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Configurar hoja (usar import y sheet devueltos al subir)
+PUT {{base}}/imports/{{import}}/sheets/{{sheet}}
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expected_configuration_revision":1,"selected":true,"survey_type":"titulados","dictionary_version":"umss-hibrido-v1","header_row":1,"data_region":{"first_data_row":2,"last_data_row":null,"first_column_index":0,"last_column_index":1},"columns":[{"column_index":0,"role":"field","field_id":"T03"},{"column_index":1,"role":"field","field_id":"T08"}],"multiselect_rules":[]}
+
+### Validar
+POST {{base}}/imports/{{import}}/validate
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expected_configuration_revision":2}
+
+### Consultar incidencias de esa validación
+GET {{base}}/imports/{{import}}/issues?validation_run_id={{validation}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Incorporar (generar UUID nuevo por confirmación; conservarlo al reintentar)
+POST {{base}}/imports/{{import}}/commit
+Authorization: Bearer {{token}}
+Idempotency-Key: 4f4ca9cd-585a-4c31-b22e-1ec04bc10c5a
+Accept: application/json
+Content-Type: application/json
+
+{"configuration_revision":2,"validation_run_id":"{{validation}}","policy":{"mode":"append"}}
+
+### Distribución
+GET {{base}}/datasets/{{dataset}}/analytics/distribution?survey_type=titulados&field_id=T08
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Exportar estadísticas de la versión visualizada
+POST {{base}}/datasets/{{dataset}}/exports
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expected_data_version":1,"format":"xlsx","kind":"distribution","survey_type":"titulados","field_id":"T08","filters":[]}
+
+### Crear invitación individual (token distinto al administrativo)
+POST {{base}}/datasets/{{dataset}}/invitations
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{"expires_in_hours":48}

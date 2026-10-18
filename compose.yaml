@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - .:/var/www/html
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/umss.ini:ro
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-umss}
+      POSTGRES_USER: ${DB_USERNAME:-umss}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Define DB_PASSWORD en .env}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-testing.sql:/docker-entrypoint-initdb.d/01-testing.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  postgres_data:

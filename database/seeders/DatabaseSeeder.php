@@ -17,9 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Usuarios administrativos se crean con app:create-admin; no hay credenciales ni encuestas de demostración.
     }
 }

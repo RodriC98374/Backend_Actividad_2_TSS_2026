@@ -1,0 +1,1868 @@
+[
+  {
+    "id": "T01",
+    "name": "edad_rango",
+    "label": "Edad que tiene actualmente:",
+    "type": "range",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "15_18_anos",
+        "label": "15 - 18 años"
+      },
+      {
+        "code": "19_22_anos",
+        "label": "19 - 22 años"
+      },
+      {
+        "code": "23_26_anos",
+        "label": "23 - 26 años"
+      },
+      {
+        "code": "27_30_anos",
+        "label": "27 - 30 años"
+      },
+      {
+        "code": "31_34_anos",
+        "label": "31 - 34 años"
+      },
+      {
+        "code": "35_anos_o_mas",
+        "label": "35 años o más"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T02",
+    "name": "genero",
+    "label": "Género:",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "hombre",
+        "label": "Hombre"
+      },
+      {
+        "code": "mujer",
+        "label": "Mujer"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T03",
+    "name": "tiene_formacion_complementaria",
+    "label": "Posterior a sus estudios de pregrado en Ingeniería en Sistemas, ¿Ha realizado o se encuentra realizando algún programa de formación complementaria? (programas de posgrado, diplomados, doble titulación por diplomado, especializaciones, etc)",
+    "type": "boolean",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "si",
+        "label": "Sí"
+      },
+      {
+        "code": "no",
+        "label": "No"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T04",
+    "name": "nivel_formacion_complementaria",
+    "label": "¿CUÁL ES EL PROGRAMA DE FORMACIÓN COMPLEMENTARIA DE MAYOR NIVEL QUE HA CONCLUIDO O QUE SE ENCUENTRA REALIZANDO?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "diplomado",
+        "label": "DIPLOMADO"
+      },
+      {
+        "code": "especialidad",
+        "label": "ESPECIALIDAD"
+      },
+      {
+        "code": "maestria",
+        "label": "MAESTRIA"
+      },
+      {
+        "code": "doctorado",
+        "label": "DOCTORADO"
+      },
+      {
+        "code": "pos_doctorado",
+        "label": "POS DOCTORADO"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T05",
+    "name": "institucion_formacion_tipo",
+    "label": "¿DONDE HA CURSADO EL PROGRAMA INDICADO?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "escuela_universitaria_de_posgrado_eupg",
+        "label": "ESCUELA UNIVERSITARIA DE POSGRADO (EUPG)"
+      },
+      {
+        "code": "direccion_de_posgrado_fcyt",
+        "label": "DIRECCIÓN DE POSGRADO FCyT"
+      },
+      {
+        "code": "ibnorca",
+        "label": "IBNORCA"
+      },
+      {
+        "code": "universidades_internacionales",
+        "label": "UNIVERSIDADES INTERNACIONALES"
+      },
+      {
+        "code": "universidades_publicas_nacionales",
+        "label": "UNIVERSIDADES PÚBLICAS NACIONALES"
+      },
+      {
+        "code": "universidades_privadas_nacionales",
+        "label": "UNIVERSIDADES PRIVADAS NACIONALES"
+      },
+      {
+        "code": "otro",
+        "label": "OTRO"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T06",
+    "name": "financiamiento_formacion",
+    "label": "¿CUÁL FUE LA FUENTE DE FINANCIAMIENTO PARA CURSAR EL PROGRAMA INDICADO?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "financiado_con_recursos_propios",
+        "label": "FINANCIADO CON RECURSOS PROPIOS"
+      },
+      {
+        "code": "total_financiamiento_por_medio_de_una_beca",
+        "label": "TOTAL FINANCIAMIENTO POR MEDIO DE UNA BECA"
+      },
+      {
+        "code": "financiado_parcialmente_por_medio_de_una_beca",
+        "label": "FINANCIADO PARCIALMENTE POR MEDIO DE UNA BECA"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T07",
+    "name": "programa_nombre",
+    "label": "INDIQUE EL NOMBRE DEL PROGRAMA",
+    "type": "text",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T08",
+    "name": "interes_posgrado",
+    "label": "¿ESTARÍA INTERESADO EN REALIZAR ESTUDIOS EN ALGÚN PROGRAMA DE POSGRADO DENTRO DE LAS ÁREAS DE LA INGENIERÍA EN SISTEMAS?",
+    "type": "boolean",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "si",
+        "label": "Sí"
+      },
+      {
+        "code": "no",
+        "label": "No"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T09",
+    "name": "area_posgrado_interes",
+    "label": "¿EN CUÁL DE LAS SIGUIENTES ÁREAS LE INTERESARÍA REALIZAR EL PROGRAMA?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "ia",
+        "label": "IA"
+      },
+      {
+        "code": "robotica",
+        "label": "Robótica"
+      },
+      {
+        "code": "ingenieria_de_software",
+        "label": "Ingenieria de Software"
+      },
+      {
+        "code": "base_de_datos",
+        "label": "Base de Datos"
+      },
+      {
+        "code": "redes_de_datos_y_seguridad",
+        "label": "Redes de Datos y Seguridad"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T10",
+    "name": "institucion_posgrado_preferida",
+    "label": "EN CASO DE REALIZAR UN ESTUDIO DE POSGRADO ¿EN QUÉ ORGANIZACIÓN EDUCATIVA OPTARÍA POR REALIZAR SUS ESTUDIOS DE POSGRADO?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "escuela_universitaria_de_posgrado_eupg",
+        "label": "ESCUELA UNIVERSITARIA DE POSGRADO (EUPG)"
+      },
+      {
+        "code": "direccion_de_posgrado_fcyt",
+        "label": "DIRECCIÓN DE POSGRADO FCyT"
+      },
+      {
+        "code": "ibnorca",
+        "label": "IBNORCA"
+      },
+      {
+        "code": "universidades_internacionales",
+        "label": "UNIVERSIDADES INTERNACIONALES"
+      },
+      {
+        "code": "universidades_publicas_nacionales",
+        "label": "UNIVERSIDADES PÚBLICAS NACIONALES"
+      },
+      {
+        "code": "universidades_privadas_nacionales",
+        "label": "UNIVERSIDADES PRIVADAS NACIONALES"
+      },
+      {
+        "code": "otro",
+        "label": "OTRO"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T11",
+    "name": "afinidad_oferta_posgrado_fcyt",
+    "label": "¿CUAL ES SU OPINIÓN PERSONAL RESPECTO AL POSGRADO DE LA FCyT? — ¿Considera que existen programas de formación de posgrado ofertados en la Dirección de Posgrado de la FCyT que son afines a las áreas de especialidad de un Ingeniero en Sistemas?",
+    "type": "scale",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "totalmente_en_desacuerdo",
+        "label": "Totalmente en desacuerdo"
+      },
+      {
+        "code": "en_desacuerdo",
+        "label": "En desacuerdo"
+      },
+      {
+        "code": "de_acuerdo",
+        "label": "De acuerdo"
+      },
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de Acuerdo"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T12",
+    "name": "anios_vida_profesional",
+    "label": "¿CUÁNTOS SON LOS AÑOS DE VIDA PROFESIONAL QUE LLEVA HASTA LA FECHA?",
+    "type": "number",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T13",
+    "name": "tiempo_desempleado_declarado",
+    "label": "DE LA CANTIDAD DE TIEMPO RESPONDIDA EN LA PREGUNTA ANTERIOR, ¿QUÉ CANTIDAD CORRESPONDE AL TOTAL DE TIEMPO EN QUE SE HA ENCONTRADO DESEMPLEADO?",
+    "type": "number",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": true
+  },
+  {
+    "id": "T14",
+    "name": "situacion_laboral",
+    "label": "¿CUÁL DE LAS SIGUIENTES AFIRMACIONES DESCRIBE SU SITUACIÓN LABORAL ACTUAL?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "organizacion",
+        "label": "Actualmente me encuentro trabajando un una organización"
+      },
+      {
+        "code": "sin_trabajo",
+        "label": "Actualmente NO trabajo"
+      },
+      {
+        "code": "emprendimiento_tiempo_completo",
+        "label": "Actualmente dedico mi tiempo COMPLETO a un emprendimiento propio"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T15",
+    "name": "emprendimiento_origen",
+    "label": "¿Cuál es el origen del desarrollo de su propio emprendimiento?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "idea_propia",
+        "label": "Idea propia."
+      },
+      {
+        "code": "idea_conjunta_con_companeros",
+        "label": "Idea conjunta con compañeros."
+      },
+      {
+        "code": "startup",
+        "label": "StartUp"
+      },
+      {
+        "code": "spin_off_derivado_de_un_proyecto_de_la_universidad",
+        "label": "Spin Off (derivado de un proyecto de la Universidad)"
+      },
+      {
+        "code": "otro",
+        "label": "Otro."
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T16",
+    "name": "emprendimiento_entregable",
+    "label": "¿Qué tipo de entregable genera el negocio?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "producto",
+        "label": "Producto"
+      },
+      {
+        "code": "servicio",
+        "label": "Servicio"
+      },
+      {
+        "code": "ambos",
+        "label": "Ambos"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T17",
+    "name": "emprendimiento_financiamiento",
+    "label": "¿Ha requerido financiamiento externo para su negocio?",
+    "type": "category",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "si_mediante_prestamos_bancarios",
+        "label": "Si, mediante préstamos bancarios."
+      },
+      {
+        "code": "si_mediante_inversores",
+        "label": "Si, mediante inversores."
+      },
+      {
+        "code": "no_financiamiento_propio",
+        "label": "No, financiamiento propio."
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T18",
+    "name": "emprendimiento_satisfaccion",
+    "label": "¿Qué tan satisfecho está con el rendimiento actual de su negocio?",
+    "type": "scale",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "insatisfecho",
+        "label": "Insatisfecho"
+      },
+      {
+        "code": "algo_satisfecho",
+        "label": "Algo satisfecho"
+      },
+      {
+        "code": "satisfecho",
+        "label": "Satisfecho"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T19",
+    "name": "formacion_importancia_negocio",
+    "label": "¿Qué tan importante considera que fue su formación en Ingeniería en Sistemas para iniciar y gestionar su negocio?",
+    "type": "scale",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "no_es_importante",
+        "label": "No es importante"
+      },
+      {
+        "code": "poco_importante",
+        "label": "Poco Importante"
+      },
+      {
+        "code": "importante",
+        "label": "Importante"
+      },
+      {
+        "code": "muy_importante",
+        "label": "Muy importante"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T20",
+    "name": "trabajo_actual_primer_empleo",
+    "label": "¿El trabajo que ejerce actualmente es su primer empleo?",
+    "type": "boolean",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "si",
+        "label": "Sí"
+      },
+      {
+        "code": "no",
+        "label": "No"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T21",
+    "name": "tiempo_primer_empleo_area",
+    "label": "Luego de titularse, ¿Cuánto tiempo se demoró en conseguir su primer trabajo relacionado con su formación como Ingeniero en Sistemas?",
+    "type": "range",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "ya_trabajaba_antes_de_titularse",
+        "label": "Ya trabajaba antes de titularse"
+      },
+      {
+        "code": "menos_de_1_mes",
+        "label": "Menos de 1 mes"
+      },
+      {
+        "code": "entre_1_4_meses",
+        "label": "Entre 1 - 4 meses"
+      },
+      {
+        "code": "entre_4_8_meses",
+        "label": "Entre 4 - 8 meses"
+      },
+      {
+        "code": "entre_8_12_meses",
+        "label": "Entre 8 - 12 meses"
+      },
+      {
+        "code": "mas_de_12_meses",
+        "label": "Más de 12 meses"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T22",
+    "name": "cantidad_empleos_rango",
+    "label": "Desde que se tituló, ¿en cuántos empleos usted se ha desempeñado? (Incluyendo su actual empleo si corresponde)",
+    "type": "range",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "1",
+        "label": "1"
+      },
+      {
+        "code": "2",
+        "label": "2"
+      },
+      {
+        "code": "3",
+        "label": "3"
+      },
+      {
+        "code": "mas_de_3",
+        "label": "Más de 3"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T23",
+    "name": "satisfaccion_formacion",
+    "label": "De manera global ¿Cuál es el grado de satisfacción que ha desarrollado con la formación profesional recibida en la Carrera de Ingenieria de Sistemas",
+    "type": "scale",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "totalmente_en_desacuerdo",
+        "label": "Totalmente en desacuerdo"
+      },
+      {
+        "code": "en_desacuerdo",
+        "label": "En desacuerdo"
+      },
+      {
+        "code": "de_acuerdo",
+        "label": "De acuerdo"
+      },
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de Acuerdo"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T24",
+    "name": "concordancia_formacion",
+    "label": "Considera que existe concordancia entre la formación profesional recibida en la Carrera de Ingeniería de Sistemas y los requerimientos",
+    "type": "scale",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "totalmente_en_desacuerdo",
+        "label": "Totalmente en desacuerdo"
+      },
+      {
+        "code": "en_desacuerdo",
+        "label": "En desacuerdo"
+      },
+      {
+        "code": "de_acuerdo",
+        "label": "De acuerdo"
+      },
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de Acuerdo"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T25",
+    "name": "aspectos_utiles",
+    "label": "¿Qué aspectos de la Carrera les resultaron de bastante utilidad?",
+    "type": "multiselect",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "la_aplicacion_practica_de_conceptos_teoricos_en_proyectos_reales",
+        "label": "La aplicación práctica de conceptos teóricos en proyectos reales."
+      },
+      {
+        "code": "la_oportunidad_de_realizar_pasantias_o_practicas_profesionales",
+        "label": "La oportunidad de realizar pasantías o prácticas profesionales."
+      },
+      {
+        "code": "la_distribucion_de_los_horarios_de_clases",
+        "label": "La distribución de los horarios de clases."
+      },
+      {
+        "code": "el_desarrollo_de_habilidades_analiticas_y_de_resolucion_de_problemas",
+        "label": "El desarrollo de habilidades analíticas y de resolución de problemas."
+      },
+      {
+        "code": "la_colaboracion_de_equipos_multidisciplinarios_para_resolver_problemas_complejos",
+        "label": "La colaboración de equipos multidisciplinarios para resolver problemas complejos."
+      },
+      {
+        "code": "la_ensenanza_de_herramientas_y_software_especifico_de_la_industria",
+        "label": "La enseñanza de herramientas y software específico de la industria."
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T26",
+    "name": "aspectos_mejora",
+    "label": "¿Qué aspectos de la Carrera considera que pueden mejorarse?",
+    "type": "multiselect",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "mayor_integracion_de_la_teoria_con_aplicaciones_practicas_en_el_plan_de_estudios",
+        "label": "Mayor integración de la teoría con aplicaciones prácticas en el plan de estudios."
+      },
+      {
+        "code": "mayor_relacionamiento_del_estudiante_con_las_empresas_por_medio_de_practica_profesionales",
+        "label": "Mayor relacionamiento del estudiante con las empresas por medio de práctica profesionales."
+      },
+      {
+        "code": "la_distribucion_de_horarios_de_clases_horario_para_trabajadores_modulos_virtuales_etc",
+        "label": "La distribución de horarios de clases. (Horario para trabajadores, módulos virtuales, etc)"
+      },
+      {
+        "code": "actualizacion_constante_del_plan_de_estudios_para_atender_tendencias_actuales",
+        "label": "Actualización constante del plan de estudios para atender tendencias actuales."
+      },
+      {
+        "code": "incremento_de_actividades_extracurriculares_investigacion_servicio_social_etc",
+        "label": "Incremento de actividades extracurriculares (Investigación, servicio social, etc)"
+      },
+      {
+        "code": "ofrecimiento_de_mas_opciones_de_especializacion",
+        "label": "Ofrecimiento de más opciones de especialización."
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T27",
+    "name": "asignaturas_utiles",
+    "label": "Indique 5 asignaturas cursadas en la Carrera que considera que le brindaron una ventaja competitiva al momento de buscar trabajo o desenvolverse profesionalmente.",
+    "type": "multiselect",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "introduccion",
+        "label": "Introducción"
+      },
+      {
+        "code": "base_de_datos",
+        "label": "Base de Datos"
+      },
+      {
+        "code": "inteligencia_artificial",
+        "label": "Inteligencia Artificial"
+      },
+      {
+        "code": "redes_de_computadora",
+        "label": "Redes de Computadora"
+      },
+      {
+        "code": "electivas",
+        "label": "Electivas"
+      },
+      {
+        "code": "t_i_s",
+        "label": "T.I.S."
+      },
+      {
+        "code": "basicas_fisica_calculo_algebras",
+        "label": "Básicas (Física, Calculo, Algebras)"
+      },
+      {
+        "code": "planificacion_de_proyectos_y_gestion",
+        "label": "Planificación de Proyectos y Gestión"
+      },
+      {
+        "code": "tecnologia_redes_avanzadas",
+        "label": "Tecnologia Redes Avanzadas"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T28",
+    "name": "asignatura_util_otra",
+    "label": "Otra asignatura: [después de asignaturas útiles]",
+    "type": "text",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T29",
+    "name": "asignaturas_poco_utiles",
+    "label": "Indique 5 asignaturas cursadas en la Carrera que no le resultaron de mucha utilidad en su vida profesional.",
+    "type": "multiselect",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "basicas_fisica_calculo_algebras",
+        "label": "Básicas (Física, Calculo, Algebras)"
+      },
+      {
+        "code": "aplic_interactivas_para_television_digital",
+        "label": "Aplic. Interactivas para Televisión Digital"
+      },
+      {
+        "code": "telefonia_ip",
+        "label": "Telefonía IP"
+      },
+      {
+        "code": "web_semanticas",
+        "label": "Web Semánticas"
+      },
+      {
+        "code": "graficacion_por_computadora",
+        "label": "Graficación por Computadora"
+      },
+      {
+        "code": "robotica",
+        "label": "Robótica"
+      },
+      {
+        "code": "taller_de_programacion_en_bajo_nivel",
+        "label": "Taller de Programación en Bajo Nivel"
+      },
+      {
+        "code": "teoria_de_automatas_y_leng_formales",
+        "label": "Teoría de Autómatas y Leng. Formales"
+      },
+      {
+        "code": "programacion_funcional",
+        "label": "Programación Funcional"
+      },
+      {
+        "code": "teoria_de_grafos",
+        "label": "Teoría de Grafos"
+      },
+      {
+        "code": "contabilidad_basica",
+        "label": "Contabilidad Básica"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T30",
+    "name": "asignatura_poco_util_otra",
+    "label": "Otra asignatura: [después de asignaturas poco útiles]",
+    "type": "text",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T31",
+    "name": "interes_red_contactos",
+    "label": "¿Le interesaría formar parte una red de contactos oficial de la Carrera de Ingeniería en Sistemas para compartir experiencias, proyectos y ofertas laborales?",
+    "type": "boolean",
+    "survey_type": "titulados",
+    "options": [
+      {
+        "code": "si",
+        "label": "Sí"
+      },
+      {
+        "code": "no",
+        "label": "No"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T32",
+    "name": "email_contacto",
+    "label": "Email de contacto:",
+    "type": "contact",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T33",
+    "name": "telefono_contacto",
+    "label": "Número telefónico de contacto: DE PREFERENCIA CON ACCESO A WHATASAPP",
+    "type": "contact",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "T34",
+    "name": "linkedin_url",
+    "label": "LINK de LinkedIn",
+    "type": "contact",
+    "survey_type": "titulados",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E00",
+    "name": "email_contacto",
+    "label": "Correo electrónico",
+    "type": "contact",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E01",
+    "name": "organizacion_nombre",
+    "label": "1) Nombre de la Empresa o Institución",
+    "type": "text",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E02",
+    "name": "organizacion_tipo",
+    "label": "2) Tipo de organización",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "publico",
+        "label": "Público"
+      },
+      {
+        "code": "privado",
+        "label": "Privado"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E03",
+    "name": "organizacion_tamanio",
+    "label": "3) Tamaño de la organización",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "grande_100_funcionarios_o_mas",
+        "label": "Grande (100 funcionarios o más)"
+      },
+      {
+        "code": "mediana_entre_31_a_99_funcionarios",
+        "label": "Mediana (entre 31 a 99 funcionarios)"
+      },
+      {
+        "code": "pequena_entre_11_a_30_funcionarios",
+        "label": "Pequeña (entre 11 a 30 funcionarios)"
+      },
+      {
+        "code": "micro_hasta_10_funcionarios",
+        "label": "Micro (hasta 10 funcionarios)"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E04",
+    "name": "organizacion_sector",
+    "label": "4) Indique el rubro o sector principal de la organización en la que se desempeña laboralmente el profesional titulado de la Carrera de Ingeniería de Sistemas.",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "desarrollo_de_software",
+        "label": "Desarrollo de software"
+      },
+      {
+        "code": "servicios_de_tecnologias_de_informacion_ti",
+        "label": "Servicios de tecnologías de información (TI)"
+      },
+      {
+        "code": "telecomunicaciones_y_redes",
+        "label": "Telecomunicaciones y redes"
+      },
+      {
+        "code": "soporte_tecnico_y_mantenimiento_de_sistemas",
+        "label": "Soporte técnico y mantenimiento de sistemas"
+      },
+      {
+        "code": "consultoria_en_sistemas_transformacion_digital",
+        "label": "Consultoría en sistemas / transformación digital"
+      },
+      {
+        "code": "banca_y_servicios_financieros",
+        "label": "Banca y servicios financieros"
+      },
+      {
+        "code": "instituciones_publicas_gobierno",
+        "label": "Instituciones públicas / gobierno"
+      },
+      {
+        "code": "educacion_e_investigacion",
+        "label": "Educación e investigación"
+      },
+      {
+        "code": "industria_y_manufactura",
+        "label": "Industria y manufactura"
+      },
+      {
+        "code": "comercio_y_comercio_electronico",
+        "label": "Comercio y comercio electrónico"
+      },
+      {
+        "code": "salud",
+        "label": "Salud"
+      },
+      {
+        "code": "seguridad_informatica_ciberseguridad",
+        "label": "Seguridad informática / ciberseguridad"
+      },
+      {
+        "code": "analisis_de_datos_inteligencia_de_negocios",
+        "label": "Análisis de datos / inteligencia de negocios"
+      },
+      {
+        "code": "startups_o_emprendimientos_tecnologicos",
+        "label": "Startups o emprendimientos tecnológicos"
+      },
+      {
+        "code": "otros",
+        "label": "Otros"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E05",
+    "name": "contrato_sistemas_5_anios",
+    "label": "5) ¿La organización ha contratado Ingenieros de la carrera de Sistemas en los últimos 5 años?",
+    "type": "boolean",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "si",
+        "label": "Sí"
+      },
+      {
+        "code": "no",
+        "label": "No"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E06",
+    "name": "intencion_contratacion",
+    "label": "6) Considerando las necesidades actuales y proyectadas de la organización, ¿existe la posibilidad de incorporar Ingenieros de Sistemas en su equipo de trabajo durante los próximos años?",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "si_existe_una_alta_probabilidad_de_contratacion",
+        "label": "Sí, existe una alta probabilidad de contratación"
+      },
+      {
+        "code": "si_dependiendo_del_crecimiento_o_nuevos_proyectos_de_la_organizacion",
+        "label": "Sí, dependiendo del crecimiento o nuevos proyectos de la organización"
+      },
+      {
+        "code": "no_se_tiene_prevista_la_contratacion_actualmente",
+        "label": "No se tiene prevista la contratación actualmente"
+      },
+      {
+        "code": "no_requiere_profesionales_del_area_de_sistemas",
+        "label": "No requiere profesionales del área de Sistemas"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E07",
+    "name": "nivel_formacion_requerido",
+    "label": "7) ¿Qué nivel de formación académica o actualización profesional, demanda su organización para contratar nuevos profesionales del área?",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "licenciatura",
+        "label": "Licenciatura"
+      },
+      {
+        "code": "diplomado",
+        "label": "Diplomado"
+      },
+      {
+        "code": "especialidad",
+        "label": "Especialidad"
+      },
+      {
+        "code": "maestria",
+        "label": "Maestría"
+      },
+      {
+        "code": "doctorado",
+        "label": "Doctorado"
+      },
+      {
+        "code": "post_doctorado",
+        "label": "Post- doctorado"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E08",
+    "name": "medio_convocatoria",
+    "label": "8) ¿A través de qué medio convoca a profesionales en su organización (empresa o institución)?",
+    "type": "category",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "medios_escritos_y_audiovisuales",
+        "label": "Medios escritos y audiovisuales"
+      },
+      {
+        "code": "internet_y_redes_sociales",
+        "label": "Internet y Redes sociales"
+      },
+      {
+        "code": "postulacion_competitiva_convocatorias_publicas_y_privadas",
+        "label": "Postulación competitiva (convocatorias públicas y privadas)"
+      },
+      {
+        "code": "oferta_profesional_personal",
+        "label": "Oferta profesional personal"
+      },
+      {
+        "code": "recomendacion_de_terceros",
+        "label": "Recomendación de terceros"
+      },
+      {
+        "code": "otros",
+        "label": "Otros"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E09",
+    "name": "cargos_sistemas",
+    "label": "9) ¿Qué tipo de cargos desempeñan los profesionales titulados de la Carrera de Ingeniería de Sistemas en su organización? (Puede seleccionar más de una opción)",
+    "type": "multiselect",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "de_apoyo_asistencia_tecnologica",
+        "label": "De apoyo / asistencia tecnológica"
+      },
+      {
+        "code": "tecnico_desarrollo_de_software_administracion_de_sistemas_redes_bases_de_datos_soporte_ti",
+        "label": "Técnico (desarrollo de software, administración de sistemas, redes, bases de datos, soporte TI)"
+      },
+      {
+        "code": "analista_sistemas_datos_procesos_o_soluciones_tecnologicas",
+        "label": "Analista (sistemas, datos, procesos o soluciones tecnológicas)"
+      },
+      {
+        "code": "especialista_ciberseguridad_arquitectura_de_software_infraestructura_tecnologica_entre_otros",
+        "label": "Especialista (ciberseguridad, arquitectura de software, infraestructura tecnológica, entre otros)"
+      },
+      {
+        "code": "supervisor_coordinador_de_area_tecnologica",
+        "label": "Supervisor / Coordinador de área tecnológica"
+      },
+      {
+        "code": "jefatura_o_gerencial_gestion_de_proyectos_direccion_de_ti_transformacion_digital",
+        "label": "Jefatura o Gerencial (gestión de proyectos, dirección de TI, transformación digital)"
+      },
+      {
+        "code": "consultor_tecnologico",
+        "label": "Consultor tecnológico"
+      },
+      {
+        "code": "otros_texto_de_otra_respuesta",
+        "label": "Otros: + texto de Otra respuesta"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E10",
+    "name": "areas_tecnologias_emergentes_texto",
+    "label": "10) Desde su experiencia en el sector laboral, ¿qué nuevas áreas de conocimiento, tecnologías o tendencias emergentes considera importantes para la formación del profesional de Ingeniería de Sistemas?",
+    "type": "text",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E11",
+    "name": "herramientas_requeridas_texto",
+    "label": "11) ¿Cuáles son las nuevas herramientas tecnológicas (software, plataformas o entornos de desarrollo) que, a su criterio, debería conocer y manejar el profesional titulado de la Carrera de Ingeniería de Sistemas?",
+    "type": "text",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "E12",
+    "name": "competencias_requeridas_texto",
+    "label": "12) Desde su experiencia en el ámbito laboral, ¿qué habilidades, competencias y destrezas considera fundamentales que debe desarrollar el profesional de Ingeniería de Sistemas para responder adecuadamente a las necesidades de la organización y del mercado laboral?",
+    "type": "text",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P01",
+    "name": "perfil_confianza_carrera",
+    "label": "La Carrera de Ingeniería de Sistemas de la Universidad Mayor de San Simón brinda confianza a nuestra organización como formadora de profesionales del área tecnológica.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P02",
+    "name": "perfil_consistencia_titulo",
+    "label": "Considero que el título profesional otorgado por la Carrera de Ingeniería de Sistemas es consistente con el nivel de formación y las competencias demostradas por sus titulados.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P03",
+    "name": "perfil_consulta_perfil",
+    "label": "Las autoridades de la Carrera de Ingeniería de Sistemas consultan regularmente nuestra opinión como empleadores respecto al perfil profesional y las competencias requeridas en el ámbito laboral.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P04",
+    "name": "perfil_conocimiento_perfil",
+    "label": "Conozco el perfil profesional y las competencias de egreso declaradas por la Carrera de Ingeniería de Sistemas.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P05",
+    "name": "perfil_coherencia_perfil_desempenio",
+    "label": "El perfil profesional declarado por la Carrera de Ingeniería de Sistemas es coherente con el desempeño laboral demostrado por sus titulados.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P06",
+    "name": "perfil_desempenio_integral",
+    "label": "La formación proporcionada por la Carrera de Ingeniería de Sistemas permite a sus titulados alcanzar un desempeño destacado tanto en el ámbito profesional como en su formación integral.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P07",
+    "name": "perfil_necesidades_formacion_practica",
+    "label": "La Carrera de Ingeniería de Sistemas considera nuestra opinión como empleadores e incorpora las necesidades del sector laboral en la definición y mejora de actividades de formación práctica, pasantías y modalidades de titulación.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P08",
+    "name": "perfil_competencias_laborales_globales",
+    "label": "El desempeño profesional de los titulados de Ingeniería de Sistemas evidencia el desarrollo de competencias laborales como: comunicación efectiva, análisis y resolución de problemas, pensamiento crítico, aprendizaje continuo, trabajo en equipo, iniciativa personal y manejo adecuado de tecnologías de información.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P09",
+    "name": "perfil_valores_actitudes",
+    "label": "Los profesionales titulados de Ingeniería de Sistemas demuestran valores y actitudes relacionados con la ética profesional, responsabilidad social, inclusión, diversidad, respeto a los derechos humanos y compromiso con el medio ambiente.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "P10",
+    "name": "perfil_participacion_evaluacion",
+    "label": "He participado en procesos de recopilación de información, evaluación o retroalimentación relacionados con el desempeño laboral de los titulados de la Carrera de Ingeniería de Sistemas.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V01",
+    "name": "vinculo_vinculos_oportunidades",
+    "label": "La Carrera de Ingeniería de Sistemas mantiene vínculos con organizaciones e instituciones que generan oportunidades laborales para sus titulados.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V02",
+    "name": "vinculo_participacion_vinculacion",
+    "label": "He participado en actividades de vinculación con el entorno laboral y tecnológico organizadas por la Carrera de Ingeniería de Sistemas o la Facultad de Ciencias y Tecnología.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V03",
+    "name": "vinculo_participacion_difusion",
+    "label": "He participado en actividades de difusión de oportunidades laborales, convocatorias, pasantías o prácticas profesionales organizadas por la Carrera de Ingeniería de Sistemas.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V04",
+    "name": "vinculo_participacion_intercambio",
+    "label": "He participado en actividades de vinculación entre profesionales del sector tecnológico, empleadores, docentes y estudiantes de la Carrera de Ingeniería de Sistemas para el intercambio de conocimientos, experiencias y desarrollo de trabajos conjuntos.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V05",
+    "name": "vinculo_consulta_desempenio",
+    "label": "Como empleador, he sido consultado sobre el desempeño profesional de los titulados de Ingeniería de Sistemas, con el propósito de retroalimentar el perfil profesional y el plan de estudios de la Carrera.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V06",
+    "name": "vinculo_consulta_pertinencia",
+    "label": "Como empleador, la Carrera de Ingeniería de Sistemas ha consultado nuestra opinión respecto a la pertinencia de la formación impartida y su correspondencia con las necesidades del sector tecnológico y laboral.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V07",
+    "name": "vinculo_busqueda_talento_umss",
+    "label": "Cuando nuestra organización requiere profesionales del área de Sistemas, recurrimos a la Universidad Mayor de San Simón y a la Carrera de Ingeniería de Sistemas como fuente de búsqueda de talento profesional.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "V08",
+    "name": "vinculo_consulta_autoevaluacion",
+    "label": "He sido consultado periódicamente por la Carrera de Ingeniería de Sistemas durante sus procesos de autoevaluación y mejora continua.",
+    "type": "scale",
+    "survey_type": "empleadores",
+    "options": [
+      {
+        "code": "totalmente_de_acuerdo",
+        "label": "Totalmente de acuerdo"
+      },
+      {
+        "code": "parcialmente_de_acuerdo",
+        "label": "Parcialmente de acuerdo"
+      },
+      {
+        "code": "totalmente_desacuerdo",
+        "label": "Totalmente desacuerdo"
+      },
+      {
+        "code": "no_sabe",
+        "label": "No sabe"
+      }
+    ],
+    "aliases": [],
+    "uncertain_unit": false
+  },
+  {
+    "id": "cargos_otro_texto",
+    "name": "cargos_otro_texto",
+    "label": "Otro cargo (texto)",
+    "type": "text",
+    "survey_type": "empleadores",
+    "options": [],
+    "aliases": []
+  },
+  {
+    "id": "X01",
+    "name": "anio_egreso",
+    "label": "Año de egreso",
+    "type": "number",
+    "options": [],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X02",
+    "name": "anio_titulacion",
+    "label": "Año de titulación (opcional)",
+    "type": "number",
+    "options": [],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X03",
+    "name": "situacion_actual",
+    "label": "Situación de ocupación actual",
+    "type": "category",
+    "options": [
+      {
+        "code": "empleado",
+        "label": "Trabajo en una organización"
+      },
+      {
+        "code": "independiente",
+        "label": "Trabajo independiente"
+      },
+      {
+        "code": "emprendimiento",
+        "label": "Emprendimiento propio"
+      },
+      {
+        "code": "sin_trabajo",
+        "label": "Actualmente no trabajo"
+      }
+    ],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X04",
+    "name": "sector_actual",
+    "label": "Sector de desempeño actual",
+    "type": "category",
+    "options": [
+      {
+        "code": "desarrollo_de_software",
+        "label": "Desarrollo de software"
+      },
+      {
+        "code": "servicios_de_tecnologias_de_informacion_ti",
+        "label": "Servicios de tecnologías de información (TI)"
+      },
+      {
+        "code": "telecomunicaciones_y_redes",
+        "label": "Telecomunicaciones y redes"
+      },
+      {
+        "code": "soporte_tecnico_y_mantenimiento_de_sistemas",
+        "label": "Soporte técnico y mantenimiento de sistemas"
+      },
+      {
+        "code": "consultoria_en_sistemas_transformacion_digital",
+        "label": "Consultoría en sistemas / transformación digital"
+      },
+      {
+        "code": "banca_y_servicios_financieros",
+        "label": "Banca y servicios financieros"
+      },
+      {
+        "code": "instituciones_publicas_gobierno",
+        "label": "Instituciones públicas / gobierno"
+      },
+      {
+        "code": "educacion_e_investigacion",
+        "label": "Educación e investigación"
+      },
+      {
+        "code": "industria_y_manufactura",
+        "label": "Industria y manufactura"
+      },
+      {
+        "code": "comercio_y_comercio_electronico",
+        "label": "Comercio y comercio electrónico"
+      },
+      {
+        "code": "salud",
+        "label": "Salud"
+      },
+      {
+        "code": "seguridad_informatica_ciberseguridad",
+        "label": "Seguridad informática / ciberseguridad"
+      },
+      {
+        "code": "analisis_de_datos_inteligencia_de_negocios",
+        "label": "Análisis de datos / inteligencia de negocios"
+      },
+      {
+        "code": "startups_o_emprendimientos_tecnologicos",
+        "label": "Startups o emprendimientos tecnológicos"
+      },
+      {
+        "code": "otros",
+        "label": "Otros"
+      }
+    ],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X05",
+    "name": "posgrado_futuro",
+    "label": "Nivel de posgrado que le interesaría estudiar",
+    "type": "category",
+    "options": [
+      {
+        "code": "especialidad",
+        "label": "Especialidad"
+      },
+      {
+        "code": "maestria",
+        "label": "Maestría"
+      },
+      {
+        "code": "doctorado",
+        "label": "Doctorado"
+      },
+      {
+        "code": "no_definido",
+        "label": "Todavía no definido"
+      }
+    ],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X06",
+    "name": "area_futura",
+    "label": "Área temática de interés futuro",
+    "type": "category",
+    "options": [
+      {
+        "code": "ia",
+        "label": "IA"
+      },
+      {
+        "code": "robotica",
+        "label": "Robótica"
+      },
+      {
+        "code": "ingenieria_de_software",
+        "label": "Ingenieria de Software"
+      },
+      {
+        "code": "base_de_datos",
+        "label": "Base de Datos"
+      },
+      {
+        "code": "redes_de_datos_y_seguridad",
+        "label": "Redes de Datos y Seguridad"
+      }
+    ],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  },
+  {
+    "id": "X07",
+    "name": "financiamiento_futuro",
+    "label": "Fuentes estimadas de financiamiento futuro",
+    "type": "multiselect",
+    "options": [
+      {
+        "code": "recursos_propios",
+        "label": "Recursos propios"
+      },
+      {
+        "code": "beca",
+        "label": "Beca"
+      },
+      {
+        "code": "credito",
+        "label": "Crédito educativo"
+      },
+      {
+        "code": "patrocinio_empresarial",
+        "label": "Patrocinio empresarial"
+      },
+      {
+        "code": "por_definir",
+        "label": "Por definir"
+      }
+    ],
+    "survey_type": "titulados",
+    "aliases": [],
+    "provisional": true
+  }
+]
