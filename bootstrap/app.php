@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        if (env('RENDER', false)) {
+            $middleware->trustProxies(at: '*');
+        }
         $middleware->api(prepend: [\App\Http\Middleware\BrowserSession::class]);
         $middleware->trimStrings(except: ['csv_delimiter', 'multiselect_rules.*.delimiter', 'multiselect_rules.*.selected_values.*', 'multiselect_rules.*.unselected_values.*']);
         $middleware->alias(['admin' => Administrator::class, 'capture' => CaptureAccess::class]);
