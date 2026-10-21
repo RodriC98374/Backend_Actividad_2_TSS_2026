@@ -1,0 +1,29 @@
+FROM node:22-bookworm-slim AS frontend
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
+WORKDIR /frontend
+ARG FRONTEND_REF=5ed027c09934a4a8e35db1940485f27fd42c74a8
+RUN git init && git remote add origin https://github.com/RodriC98374/Frontend_Actividad_2_TSS_2026.git \
+    && git fetch --depth=1 origin "$FRONTEND_REF" && git checkout --detach FETCH_HEAD
+RUN npm ci && npm run build
+
+FROM php:8.4-fpm-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends nginx supervisor gettext-base git unzip python3 python3-venv libpq-dev libzip-dev libicu-dev libonig-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j2 pdo_pgsql mbstring zip intl gd pcntl bcmath opcache \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY requirements-pdf.txt /tmp/requirements-pdf.txt
+RUN python3 -m venv /opt/pdf && /opt/pdf/bin/pip install --no-cache-dir -r /tmp/requirements-pdf.txt
+WORKDIR /var/www/html
+COPY . .
+RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader \
+    && mkdir -p storage/app/private storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
+COPY --from=frontend /frontend/dist /var/www/frontend
+COPY docker/render/nginx.conf.template /etc/nginx/acredi.conf.template
+COPY docker/render/supervisord.conf /etc/supervisor/conf.d/acredi.conf
+COPY docker/render/php.ini /usr/local/etc/php/conf.d/acredi-production.ini
+COPY docker/render/fpm.conf /usr/local/etc/php-fpm.d/zz-acredi.conf
+RUN chmod +x docker/render/start.sh
+EXPOSE 10000
+CMD ["/var/www/html/docker/render/start.sh"]

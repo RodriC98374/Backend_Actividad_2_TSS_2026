@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: acredi-demo
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile.render
+    healthCheckPath: /up
+    autoDeployTrigger: "off"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_SECRET
+        generateValue: true
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: acredi-demo-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: SESSION_COOKIE
+        value: acredi_demo_session
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: BOOTSTRAP_ADMIN_EMAIL
+        sync: false
+      - key: BOOTSTRAP_ADMIN_PASSWORD
+        sync: false
+databases:
+  - name: acredi-demo-db
+    plan: free
+    region: oregon
+    postgresMajorVersion: "17"
+    databaseName: acredi
+    user: acredi
+    ipAllowList: []
