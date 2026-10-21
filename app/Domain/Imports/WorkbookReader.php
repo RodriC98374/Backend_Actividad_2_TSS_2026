@@ -9,12 +9,36 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use ZipArchive;
+use Symfony\Component\Process\Process;
 
 class WorkbookReader
 {
     public function read(string $path, string $extension, ?string $delimiter = null, string $encoding = 'UTF-8'): array
     {
-        return $extension === 'csv' ? $this->csv($path, $delimiter, $encoding) : $this->xlsx($path);
+        return match ($extension) {
+            'csv' => $this->csv($path, $delimiter, $encoding),
+            'pdf' => $this->pdf($path),
+            'xlsx' => $this->xlsx($path),
+            default => throw new ApiProblem('unsupported_format', 'Selecciona XLSX, CSV o PDF de respuestas.'),
+        };
+    }
+
+    private function pdf(string $path): array
+    {
+        $process = new Process([config('surveys.pdf_python'), '-I', base_path('scripts/read-survey-pdf.py'), $path,
+            (string) config('surveys.max_pdf_pages'), (string) config('surveys.max_rows'), (string) config('surveys.max_cells')]);
+        $process->setTimeout(45);
+        try {
+            $process->run();
+        } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
+            throw new ApiProblem('pdf_timeout', 'El PDF tardó demasiado en leerse. Usa el Excel original o un archivo más pequeño.');
+        }
+        $result = json_decode($process->getOutput(), true);
+        if (! $process->isSuccessful() || ! isset($result['sheets'])) {
+            throw new ApiProblem('unsupported_pdf', $result['error'] ?? 'El lector PDF no está disponible. Actualiza el contenedor del backend.');
+        }
+
+        return $result['sheets'];
     }
 
     private function csv(string $path, ?string $delimiter, string $encoding): array

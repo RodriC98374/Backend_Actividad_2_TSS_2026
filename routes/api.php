@@ -62,6 +62,7 @@ Route::prefix('v1')->group(function () {
         Route::patch('responses/{response}', [ResponseController::class, 'update']);
         Route::get('responses/{response}/contacts', [ResponseController::class, 'contacts']);
         Route::get('responses/{response}/history', [ResponseController::class, 'history']);
+        Route::get('datasets/{dataset}/analytics/overview', [AnalyticsController::class, 'overview']);
         Route::get('datasets/{dataset}/analytics/{kind}', [AnalyticsController::class, 'show'])->whereIn('kind', ['distribution', 'numeric-summary', 'crosstab']);
         Route::post('datasets/{dataset}/exports', [ExportController::class, 'store']);
         Route::get('exports/{export}', [ExportController::class, 'show']);

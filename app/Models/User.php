@@ -23,6 +23,13 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    protected $appends = ['can_import_files'];
+
+    public function getCanImportFilesAttribute($value): bool
+    {
+        return $value === null ? (bool) $this->can_view_contacts : (bool) $value;
+    }
+
     protected function casts(): array
     {
         return [

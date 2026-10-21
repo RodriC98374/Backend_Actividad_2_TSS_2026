@@ -42,6 +42,13 @@ class Api
         }
     }
 
+    public static function imports(Request $request): void
+    {
+        if (! $request->user()?->can_import_files) {
+            throw new ApiProblem('forbidden', 'Se requiere permiso de importación y originales.', 403);
+        }
+    }
+
     public static function contacts(Request $request): void
     {
         if (! $request->user()?->can_view_contacts) {

@@ -55,6 +55,18 @@ class SheetAssessmentTest extends TestCase
         $this->assertDatabaseCount('survey_responses', 0);
     }
 
+    public function test_employer_headers_suggest_correct_survey_without_changing_import(): void
+    {
+        $import = $this->upload("Marca temporal,1)Nombre de la Empresa o Institución\n2026-01-01,Empresa de ejemplo\n");
+        $data = $this->getJson($this->url($import).'&header_row=1')->assertOk()->json('data');
+        $suggestions = array_column($data['survey_suggestions'], 'matched_columns', 'survey_type');
+        $this->assertSame(0, $suggestions['titulados']);
+        $this->assertSame(1, $suggestions['empleadores']);
+        $this->assertSame([], $data['columns'][0]['field_candidates']);
+        $this->assertDatabaseHas('imports', ['id' => $import['id'], 'configuration_revision' => 1]);
+        $this->assertDatabaseCount('survey_responses', 0);
+    }
+
     public function test_ragged_csv_missing_cells_and_distinct_cap(): void
     {
         $content = "T12\n";

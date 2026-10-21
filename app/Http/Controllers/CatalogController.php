@@ -17,6 +17,6 @@ class CatalogController extends Controller
 
     public function capabilities()
     {
-        return Api::data(['formats' => ['xlsx', 'csv'], 'dictionary_version' => config('surveys.dictionary_version'), 'limits' => ['max_bytes' => config('surveys.max_file_kb') * 1024, 'max_rows' => config('surveys.max_rows'), 'max_columns' => config('surveys.max_columns'), 'max_sheets' => config('surveys.max_sheets'), 'max_cells' => config('surveys.max_cells'), 'max_uncompressed_bytes' => config('surveys.max_uncompressed_bytes')], 'processing_modes' => ['sync'], 'csv' => ['encodings' => ['UTF-8', 'Windows-1252'], 'delimiters' => [',', ';', "\t"]]]);
+        return Api::data(['formats' => ['xlsx', 'csv', 'pdf'], 'dictionary_version' => config('surveys.dictionary_version'), 'limits' => ['max_pdf_pages' => config('surveys.max_pdf_pages'), 'max_bytes' => config('surveys.max_file_kb') * 1024, 'max_rows' => config('surveys.max_rows'), 'max_columns' => config('surveys.max_columns'), 'max_sheets' => config('surveys.max_sheets'), 'max_cells' => config('surveys.max_cells'), 'max_uncompressed_bytes' => config('surveys.max_uncompressed_bytes')], 'processing_modes' => ['sync'], 'csv' => ['encodings' => ['UTF-8', 'Windows-1252'], 'delimiters' => [',', ';', "\t"]]]);
     }
 }

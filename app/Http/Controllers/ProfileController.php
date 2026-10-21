@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function store(Request $r)
     {
-        Api::contacts($r);
+        Api::imports($r);
         $v = $r->validate(['name' => 'required|string|max:255', 'sheet_id' => 'required|uuid|exists:import_sheets,id', 'previous_profile_id' => 'nullable|uuid|exists:import_profiles,id']);
 
         return Api::data(DB::transaction(function () use ($r, $v) {

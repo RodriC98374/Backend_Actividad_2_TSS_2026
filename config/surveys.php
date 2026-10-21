@@ -6,6 +6,8 @@ return [
     'questionnaire_version' => 'academico-titulados-v1',
     'max_schema_fields' => (int) env('SCHEMA_MAX_FIELDS', 1000),
     'max_file_kb' => (int) env('IMPORT_MAX_FILE_KB', 10240),
+    'max_pdf_pages' => 64,
+    'pdf_python' => env('PDF_PYTHON', '/opt/pdf/bin/python'),
     'max_rows' => (int) env('IMPORT_MAX_ROWS', 10000),
     'max_columns' => (int) env('IMPORT_MAX_COLUMNS', 200),
     'max_sheets' => (int) env('IMPORT_MAX_SHEETS', 20),

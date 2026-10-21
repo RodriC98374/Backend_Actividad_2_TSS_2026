@@ -36,6 +36,73 @@ class SurveyPlatformTest extends TestCase
         return $this->postJson('/api/v1/datasets', ['name' => 'Estudio de prueba'])->assertCreated()->json('data.id');
     }
 
+    public function test_paginated_pdf_requires_confirmation_and_counts_people_in_statistics(): void
+    {
+        $dataset = $this->dataset();
+        $file = UploadedFile::fake()->createWithContent('empleadores.pdf', file_get_contents(base_path('tests/Fixtures/employers-paginated.pdf')));
+        $import = $this->postJson('/api/v1/imports', ['dataset_id' => $dataset, 'file' => $file])->assertCreated()->json('data');
+        $id = $import['id'];
+        $sheet = $import['sheets'][0]['id'];
+        $this->assertSame(5, $import['sheets'][0]['row_count']);
+        $this->assertSame(32, $import['sheets'][0]['column_count']);
+        $this->assertDatabaseCount('survey_responses', 0);
+        $raw = RawRow::where('import_sheet_id', $sheet)->where('row_number', 4)->firstOrFail();
+        $this->assertSame(['page' => 32, 'table_row' => 1], $raw->original_cells[31]['source']);
+        $cells = $raw->original_cells;
+        $cells[14]['pdf_text_clipped'] = true;
+        $raw->update(['original_cells' => $cells]);
+        $this->getJson("/api/v1/imports/$id/sheets/$sheet/assessment?survey_type=empleadores&header_row=1")
+            ->assertOk()->assertJsonPath('data.columns.14.field_candidates.0', 'P01');
+        $this->putJson("/api/v1/imports/$id/sheets/$sheet", [
+            'expected_configuration_revision' => 1, 'selected' => true, 'survey_type' => 'empleadores',
+            'dictionary_version' => config('surveys.dictionary_version'), 'header_row' => 1,
+            'data_region' => ['first_data_row' => 2, 'last_data_row' => null, 'first_column_index' => 14, 'last_column_index' => 15],
+            'columns' => [['column_index' => 14, 'role' => 'field', 'field_id' => 'P01'], ['column_index' => 15, 'role' => 'field', 'field_id' => 'P02']], 'multiselect_rules' => [],
+        ])->assertOk();
+        $this->validateAndCommit($id);
+        $this->getJson("/api/v1/datasets/$dataset/analytics/overview?survey_type=empleadores")
+            ->assertOk()->assertJsonPath('data.total_responses', 4)
+            ->assertJsonPath('data.results.0.result.denominator', 3)
+            ->assertJsonPath('data.results.1.result.denominator', 4);
+        $this->assertDatabaseHas('quality_issues', ['import_id' => $id, 'code' => 'pdf_text_clipped']);
+    }
+
+    public function test_invalid_pdf_does_not_publish_responses(): void
+    {
+        $this->postJson('/api/v1/imports', ['dataset_id' => $this->dataset(),
+            'file' => UploadedFile::fake()->createWithContent('invalid.pdf', 'not a PDF'),
+        ])->assertUnprocessable()->assertJsonPath('code', 'unsupported_pdf');
+        $this->assertDatabaseCount('survey_responses', 0);
+    }
+
+    public function test_automatic_overview_preserves_population_versions_and_missing_answers(): void
+    {
+        $dataset = $this->dataset();
+        [$import] = $this->upload($dataset, "Posgrado,Interes,Tiempo,Nivel\nSí,No,2,\nNo,Sí,3,\n", ['T03', 'T08', 'T13', 'T04']);
+        $this->validateAndCommit($import);
+        $path = "/api/v1/datasets/$dataset/analytics/overview?survey_type=titulados";
+        $result = $this->getJson($path)->assertOk()->assertJsonPath('data.total_responses', 2)
+            ->assertJsonPath('data.filtered_responses', 2)->assertJsonCount(2, 'data.results')->json('data');
+        $this->assertSame(['T03', 'T08'], array_column(array_column($result['results'], 'field'), 'id'));
+        foreach ($result['results'] as $entry) {
+            $this->assertSame($result['data_version'], $entry['result']['data_version']);
+            $this->assertSame(2, $entry['result']['denominator']);
+        }
+        $filters = [['field_id' => 'T03', 'operator' => 'eq', 'value' => false]];
+        $filtered = $this->getJson($path.'&filters='.urlencode(json_encode($filters)))
+            ->assertOk()->assertJsonPath('data.total_responses', 2)->assertJsonPath('data.filtered_responses', 1)
+            ->assertJsonCount(2, 'data.results')->json('data');
+        $this->assertSame(1, $filtered['results'][0]['result']['denominator']);
+        $filters[] = ['field_id' => 'T08', 'operator' => 'eq', 'value' => false];
+        $empty = $this->getJson($path.'&filters='.urlencode(json_encode($filters)))
+            ->assertOk()->assertJsonPath('data.filtered_responses', 0)->assertJsonCount(2, 'data.results')->json('data');
+        $this->assertSame(0, $empty['results'][0]['result']['denominator']);
+        $this->assertNull($empty['results'][0]['result']['items'][0]['percentage']);
+        $other = $this->dataset();
+        $this->getJson("/api/v1/datasets/$other/analytics/overview?survey_type=titulados")
+            ->assertOk()->assertJsonPath('data.total_responses', 0)->assertJsonCount(0, 'data.results');
+    }
+
     private function upload(string $dataset, string $csv = "Repetido,Repetido\nSí,No\nNo,Sí\n", array $fields = ['T03', 'T08']): array
     {
         $i = $this->postJson('/api/v1/imports', ['file' => UploadedFile::fake()->createWithContent('encuestas.csv', $csv), 'dataset_id' => $dataset, 'csv_delimiter' => ','])->assertCreated()->json('data');
@@ -58,6 +125,21 @@ class SurveyPlatformTest extends TestCase
         $result = $this->withHeader('Idempotency-Key', $key)->postJson("/api/v1/imports/$id/commit", $body)->assertOk()->json('data');
 
         return [$result, $body, $key];
+    }
+
+    public function test_import_list_filters_before_pagination(): void
+    {
+        $first = $this->dataset();
+        $second = $this->dataset();
+        [$id] = $this->upload($first);
+        for ($n = 0; $n < 6; $n++) {
+            $this->upload($second);
+        }
+        $this->getJson("/api/v1/imports?dataset_id=$first&per_page=5")
+            ->assertOk()->assertJsonPath('meta.total', 1)
+            ->assertJsonCount(1, 'data')->assertJsonPath('data.0.id', $id);
+        $this->getJson('/api/v1/imports?per_page=5')->assertOk()->assertJsonPath('meta.total', 7);
+        $this->getJson('/api/v1/imports?dataset_id=invalid')->assertUnprocessable();
     }
 
     public function test_import_commit_replay_and_distribution(): void
