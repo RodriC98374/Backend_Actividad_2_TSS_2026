@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CreateAdministrator extends Command
 {
-    protected $signature = 'app:create-admin {email} {--name=} {--contacts : Permitir acceso a contactos y originales}';
+    protected $signature = 'app:create-admin {email} {--name=} {--contacts : Permitir consulta de contactos} {--imports : Permitir carga y consulta de originales}';
 
     protected $description = 'Crear un administrador con contraseña solicitada de forma oculta; no publica registro de usuarios.';
 
@@ -24,7 +24,7 @@ class CreateAdministrator extends Command
             return self::FAILURE;
         }
         $user = new User;
-        $user->forceFill($data + ['is_admin' => true, 'can_view_contacts' => (bool) $this->option('contacts')])->save();
+        $user->forceFill($data + ['is_admin' => true, 'can_view_contacts' => (bool) $this->option('contacts'), 'can_import_files' => (bool) $this->option('imports')])->save();
         $this->info('Administrador creado.');
 
         return self::SUCCESS;

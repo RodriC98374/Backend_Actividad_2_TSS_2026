@@ -205,3 +205,8 @@ Las escrituras de respuestas bloquean el estudio y aumentan su versión dentro d
 - Solo hay permisos globales; quedan pendientes recuperación de contraseña, gestión visual de usuarios, permisos por estudio y despliegue productivo.
 
 El frontend puede empezar ahora por login, estudios, importación/configuración/revisión, formulario, tablas de respuestas, gráficas y descarga de estadísticas. Las mejoras posteriores deben mantener o versionar este contrato.
+
+
+### Puertos locales de ACREDI
+
+Web: http://127.0.0.1:5174 · API: http://127.0.0.1:8001/api/v1. El puerto interno del contenedor PHP sigue siendo 8000. Vite usa puerto estricto y conecta su proxy al 8001 para evitar conflictos con comunidad-otb (5173/8000). PostgreSQL mantiene 55432.

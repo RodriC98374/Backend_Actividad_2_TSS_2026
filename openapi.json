@@ -3,17 +3,20 @@
   "info": {
     "title": "Encuestas UMSS — API backend v1",
     "version": "1.2.0",
-    "description": "Contrato de endpoints implementados. Administración mediante Bearer Sanctum; captura mediante token de invitación distinto. Importaciones síncronas XLSX/CSV. PostgreSQL es obligatorio. Campos X01–X07 y formulario academico-titulados-v1 son propuesta provisional. Los endpoints no listados están pendientes; el estado de implementación y de la base de datos está en README.md."
+    "description": "Contrato de endpoints implementados. Administración mediante Bearer Sanctum; captura mediante token de invitación distinto. Importaciones síncronas XLSX/CSV y PDF tabular de empleadores (plantilla paginada reconocida, sin OCR). PostgreSQL es obligatorio. Campos X01–X07 y formulario academico-titulados-v1 son propuesta provisional. Los endpoints no listados están pendientes; el estado de implementación y de la base de datos está en README.md."
   },
   "servers": [
     {
-      "url": "http://localhost:8000/api/v1",
+      "url": "http://localhost:8001/api/v1",
       "description": "Docker local"
     }
   ],
   "security": [
     {
       "AdminBearer": []
+    },
+    {
+      "BrowserSession": []
     }
   ],
   "paths": {
@@ -2170,7 +2173,7 @@
             }
           }
         },
-        "description": "Requiere can_view_contacts. Sugiere hasta 5 encabezados examinando las primeras 50 filas. header_row explícito habilita el perfil de todas las filas posteriores, incluidas filas vacías y totales: confirmar región antes de incorporar. Coincidencias exactas normalizadas con códigos, nombres, etiquetas o alias; field_candidates vacío conserva columnas desconocidas para revisión manual. Distintos limitados a 100 por columna, con indicador de cota inferior. Fórmulas no ejecutadas. No cambia configuración, revisión ni estadísticas; requiere confirmación y reglas explícitas de multiselección."
+        "description": "Requiere can_import_files. Sugiere hasta 5 encabezados examinando las primeras 50 filas. header_row explícito habilita el perfil de todas las filas posteriores, incluidas filas vacías y totales: confirmar región antes de incorporar. Coincidencias exactas normalizadas con códigos, nombres, etiquetas o alias; field_candidates vacío conserva columnas desconocidas para revisión manual. Distintos limitados a 100 por columna, con indicador de cota inferior. Fórmulas no ejecutadas. No cambia configuración, revisión ni estadísticas; requiere confirmación y reglas explícitas de multiselección."
       }
     },
     "/auth/login": {
@@ -2187,31 +2190,47 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "access_token": {
-                          "type": "string"
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "access_token": {
+                              "type": "string"
+                            },
+                            "token_type": {
+                              "type": "string",
+                              "enum": [
+                                "Bearer"
+                              ]
+                            },
+                            "expires_at": {
+                              "type": "string"
+                            },
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          },
+                          "required": [
+                            "access_token",
+                            "token_type",
+                            "expires_at",
+                            "user"
+                          ],
+                          "additionalProperties": false
                         },
-                        "token_type": {
-                          "type": "string",
-                          "enum": [
-                            "Bearer"
-                          ]
-                        },
-                        "expires_at": {
-                          "type": "string"
-                        },
-                        "user": {
-                          "$ref": "#/components/schemas/User"
+                        {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          },
+                          "required": [
+                            "user"
+                          ],
+                          "additionalProperties": false
                         }
-                      },
-                      "required": [
-                        "access_token",
-                        "token_type",
-                        "expires_at",
-                        "user"
-                      ],
-                      "additionalProperties": false
+                      ]
                     }
                   },
                   "required": [
@@ -2317,6 +2336,9 @@
                   },
                   "password": {
                     "type": "string"
+                  },
+                  "browser_session": {
+                    "type": "boolean"
                   }
                 },
                 "required": [
@@ -3963,6 +3985,15 @@
               "minimum": 1,
               "maximum": 100
             }
+          },
+          {
+            "name": "dataset_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         ],
         "responses": {
@@ -4242,7 +4273,7 @@
             }
           }
         },
-        "description": "Requiere can_view_contacts. CSV: confirmar delimitador si no es inequívoco. Un error de lectura retorna errors.import_id; corregir archivo o parámetros y subir de nuevo."
+        "description": "Requiere can_import_files. CSV: confirmar delimitador si no es inequívoco. Un error de lectura retorna errors.import_id; corregir archivo o parámetros y subir de nuevo."
       }
     },
     "/imports/{import}": {
@@ -4531,7 +4562,7 @@
             }
           }
         },
-        "description": "Requiere can_view_contacts. Filas desde 1; columnas desde 0. Encabezados repetidos conservan posiciones distintas."
+        "description": "Requiere can_import_files. Filas desde 1; columnas desde 0. Encabezados repetidos conservan posiciones distintas."
       }
     },
     "/imports/{import}/sheets/{sheet}": {
@@ -4715,7 +4746,7 @@
             }
           }
         },
-        "description": "Requiere can_view_contacts. Incrementa revisión e invalida validaciones previas. Todas las hojas usan el catálogo de la importación. Import profile no aplica reglas automáticamente: copiar settings y confirmar región."
+        "description": "Requiere can_import_files. Incrementa revisión e invalida validaciones previas. Todas las hojas usan el catálogo de la importación. Import profile no aplica reglas automáticamente: copiar settings y confirmar región."
       }
     },
     "/imports/{import}/validate": {
@@ -7643,10 +7674,225 @@
           }
         }
       }
+    },
+    "/datasets/{dataset}/analytics/overview": {
+      "get": {
+        "summary": "Resumen automático de preguntas disponibles",
+        "operationId": "get__datasets_dataset_analytics_overview",
+        "parameters": [
+          {
+            "name": "dataset",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "survey_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "titulados",
+                "empleadores"
+              ]
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "description": "Un único JSON codificado en URL. JavaScript: new URLSearchParams({filters: JSON.stringify(conditions)}).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Filters"
+                },
+                "example": [
+                  {
+                    "field_id": "T08",
+                    "operator": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación completada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "dataset_id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "data_version": {
+                          "type": "integer"
+                        },
+                        "survey_type": {
+                          "type": "string"
+                        },
+                        "filters": {
+                          "$ref": "#/components/schemas/Filters"
+                        },
+                        "total_responses": {
+                          "type": "integer"
+                        },
+                        "filtered_responses": {
+                          "type": "integer"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "field": {
+                                "$ref": "#/components/schemas/Field"
+                              },
+                              "kind": {
+                                "type": "string",
+                                "enum": [
+                                  "distribution",
+                                  "numeric-summary"
+                                ]
+                              },
+                              "result": {
+                                "$ref": "#/components/schemas/Analytics"
+                              }
+                            },
+                            "required": [
+                              "field",
+                              "kind",
+                              "result"
+                            ],
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "required": [
+                        "dataset_id",
+                        "data_version",
+                        "survey_type",
+                        "filters",
+                        "total_responses",
+                        "filtered_responses",
+                        "results"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Autenticación requerida o token inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permiso insuficiente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso inexistente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflicto de revisión, estado o idempotencia",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Límite de archivo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Entrada inválida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite de solicitudes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno sin detalles sensibles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "Resultados disponibles en respuestas incluidas, todos con la misma versión de datos. Los filtros cambian la población; los temas se organizan en el cliente. No incluye contactos, texto libre ni números de unidad desconocida."
+      }
     }
   },
   "components": {
     "securitySchemes": {
+      "BrowserSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "laravel-session",
+        "description": "Cookie HttpOnly; nombre según SESSION_COOKIE. GET /sanctum/csrf-cookie antes de login browser_session=true. En escrituras, X-XSRF-TOKEN obligatorio."
+      },
       "AdminBearer": {
         "type": "http",
         "scheme": "bearer",
@@ -8182,6 +8428,10 @@
           },
           "formula_without_cached_value_count": {
             "type": "integer"
+          },
+          "sample_values": {
+            "type": "array",
+            "items": {}
           }
         },
         "required": [
@@ -8194,7 +8444,8 @@
           "types",
           "distinct_count",
           "distinct_count_is_lower_bound",
-          "formula_without_cached_value_count"
+          "formula_without_cached_value_count",
+          "sample_values"
         ],
         "additionalProperties": false
       },
@@ -8245,6 +8496,29 @@
             "items": {
               "$ref": "#/components/schemas/AssessedColumn"
             }
+          },
+          "survey_suggestions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "survey_type": {
+                  "type": "string",
+                  "enum": [
+                    "titulados",
+                    "empleadores"
+                  ]
+                },
+                "matched_columns": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "survey_type",
+                "matched_columns"
+              ],
+              "additionalProperties": false
+            }
           }
         },
         "required": [
@@ -8279,6 +8553,9 @@
           "can_view_contacts": {
             "type": "boolean"
           },
+          "can_import_files": {
+            "type": "boolean"
+          },
           "created_at": {
             "type": "string"
           },
@@ -8302,6 +8579,7 @@
           "email",
           "is_admin",
           "can_view_contacts",
+          "can_import_files",
           "created_at",
           "updated_at",
           "email_verified_at"

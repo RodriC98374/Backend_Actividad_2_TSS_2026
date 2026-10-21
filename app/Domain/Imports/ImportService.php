@@ -36,8 +36,8 @@ class ImportService
     public function upload(UploadedFile $file, array $data, int $actor): SurveyImport
     {
         $extension = strtolower($file->getClientOriginalExtension());
-        if (! in_array($extension, ['xlsx', 'csv'], true)) {
-            throw new ApiProblem('unsupported_format', 'Solo se admiten XLSX y CSV.');
+        if (! in_array($extension, ['xlsx', 'csv', 'pdf'], true)) {
+            throw new ApiProblem('unsupported_format', 'Solo se admiten XLSX, CSV y PDF de respuestas.');
         }
         $dataset = Dataset::findOrFail($data['dataset_id']);
         if ($dataset->status !== 'active') {
@@ -232,6 +232,11 @@ class ImportService
                         }
                         $answer = $this->normalizer->field($field, $original, count($columns) > 0, $columns);
                         foreach ($columns as $index) {
+                            if ($cells->get($index)['pdf_text_clipped'] ?? false) {
+                                $answer['state'] = 'indeterminada';
+                                $answer['value'] = null;
+                                $issues[] = [$field['id'], 'pdf_text_clipped', 'Texto posiblemente recortado o superpuesto en el PDF; no se usa como respuesta válida.'];
+                            }
                             if (($cells->get($index)['type'] ?? '') === 'formula' && ($cells->get($index)['value'] ?? null) === null) {
                                 $answer['state'] = 'indeterminada';
                                 $answer['value'] = null;

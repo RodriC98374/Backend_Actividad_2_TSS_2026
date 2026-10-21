@@ -30,8 +30,13 @@ class SheetAssessment
 
         $columns = [];
         $profiled = 0;
+        $surveySuggestions = [];
         if ($headerRow !== null) {
             $header = RawRow::where('import_sheet_id', $sheet->id)->where('row_number', $headerRow)->firstOrFail();
+            foreach (['titulados', 'empleadores'] as $candidateSurvey) {
+                $candidateColumns = $this->headers($header->original_cells, $this->catalog->fields($candidateSurvey, $sheet->dictionary_version));
+                $surveySuggestions[] = ['survey_type' => $candidateSurvey, 'matched_columns' => count(array_filter($candidateColumns, fn ($c) => count($c['field_candidates']) === 1))];
+            }
             $columns = $this->headers($header->original_cells, $fields);
             // CSV rows may have fewer cells than the widest row. Preserve all positions.
             for ($index = count($columns); $index < $sheet->column_count; $index++) {
@@ -41,6 +46,7 @@ class SheetAssessment
             foreach ($columns as $index => &$column) {
                 $column += ['nonempty_count' => 0, 'empty_count' => 0, 'types' => [], 'distinct_count' => 0, 'distinct_count_is_lower_bound' => false, 'formula_without_cached_value_count' => 0];
                 $seen[$index] = [];
+                $column['sample_values'] = [];
             }
             unset($column);
             foreach (RawRow::where('import_sheet_id', $sheet->id)->where('row_number', '>', $headerRow)->orderBy('row_number')->cursor() as $row) {
@@ -58,6 +64,9 @@ class SheetAssessment
                         continue;
                     }
                     $column['nonempty_count']++;
+                    if (count($column['sample_values']) < 3 && !in_array($value, $column['sample_values'], true)) {
+                        $column['sample_values'][] = is_string($value) ? mb_substr($value, 0, 160) : $value;
+                    }
                     $type = $cell['type'];
                     $column['types'][$type] = ($column['types'][$type] ?? 0) + 1;
                     $key = hash('sha256', json_encode($value, JSON_THROW_ON_ERROR));
@@ -78,7 +87,7 @@ class SheetAssessment
             unset($column);
         }
 
-        return ['sheet_id' => $sheet->id, 'survey_type' => $survey, 'dictionary_version' => $sheet->dictionary_version, 'requires_confirmation' => true, 'header_rows_scanned' => $scanned, 'header_candidates' => array_slice($candidates, 0, 5), 'selected_header_row' => $headerRow, 'profiled_rows' => $profiled, 'columns' => $columns];
+        return ['sheet_id' => $sheet->id, 'survey_type' => $survey, 'survey_suggestions' => $surveySuggestions, 'dictionary_version' => $sheet->dictionary_version, 'requires_confirmation' => true, 'header_rows_scanned' => $scanned, 'header_candidates' => array_slice($candidates, 0, 5), 'selected_header_row' => $headerRow, 'profiled_rows' => $profiled, 'columns' => $columns];
     }
 
     private function headers(array $cells, array $fields): array

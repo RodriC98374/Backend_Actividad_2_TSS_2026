@@ -21,12 +21,18 @@ class ImportController extends Controller
 
     public function index(Request $r)
     {
-        return Api::page(SurveyImport::latest(), $r);
+        $filters = $r->validate(['dataset_id' => 'sometimes|required|uuid|exists:datasets,id']);
+        $query = SurveyImport::latest();
+        if (isset($filters['dataset_id'])) {
+            $query->where('dataset_id', $filters['dataset_id']);
+        }
+
+        return Api::page($query, $r);
     }
 
     public function store(Request $r)
     {
-        Api::contacts($r);
+        Api::imports($r);
         $v = $r->validate(['file' => 'required|file|max:'.config('surveys.max_file_kb', 10240), 'dataset_id' => 'required|uuid|exists:datasets,id', 'dictionary_version' => 'sometimes|string', 'source_label' => 'nullable|string|max:255', 'csv_delimiter' => 'nullable|in:",",;,'."\t", 'csv_encoding' => 'sometimes|in:UTF-8,Windows-1252']);
 
         return Api::data($this->service->detail($this->service->upload($r->file('file'), $v, $r->user()->id)), 201);
@@ -39,7 +45,7 @@ class ImportController extends Controller
 
     public function preview(Request $r, SurveyImport $import, string $sheet)
     {
-        Api::contacts($r);
+        Api::imports($r);
         $s = $this->service->sheet($import, $sheet);
 
         return Api::page(RawRow::where('import_sheet_id', $s->id)->orderBy('row_number'), $r);
@@ -47,7 +53,7 @@ class ImportController extends Controller
 
     public function assessment(Request $r, SurveyImport $import, string $sheet, SheetAssessment $assessment)
     {
-        Api::contacts($r);
+        Api::imports($r);
         $s = $this->service->sheet($import, $sheet);
         $v = $r->validate(['survey_type' => 'required|in:titulados,empleadores', 'header_row' => 'sometimes|integer|min:1|max:'.max(1, $s->row_count)]);
 
@@ -56,7 +62,7 @@ class ImportController extends Controller
 
     public function configure(Request $r, SurveyImport $import, string $sheet)
     {
-        Api::contacts($r);
+        Api::imports($r);
         $v = $r->validate(['expected_configuration_revision' => 'required|integer|min:1', 'selected' => 'required|boolean', 'survey_type' => 'required_if:selected,true|in:titulados,empleadores', 'dictionary_version' => 'required_if:selected,true|string', 'header_row' => 'required_if:selected,true|integer|min:1', 'data_region' => 'required_if:selected,true|array:first_data_row,last_data_row,first_column_index,last_column_index', 'data_region.first_data_row' => 'required_if:selected,true|integer|min:2', 'data_region.last_data_row' => 'nullable|integer|min:2', 'data_region.first_column_index' => 'required_if:selected,true|integer|min:0', 'data_region.last_column_index' => 'required_if:selected,true|integer|min:0', 'columns' => 'required_if:selected,true|array|min:1', 'columns.*.column_index' => 'required|integer|min:0', 'columns.*.role' => 'required|in:field,ignore', 'columns.*.field_id' => 'required_if:columns.*.role,field|string', 'multiselect_rules' => 'present|array', 'multiselect_rules.*.field_id' => 'required|string', 'multiselect_rules.*.representation' => 'required|in:delimited_cell,option_columns', 'multiselect_rules.*.column_index' => 'required_if:multiselect_rules.*.representation,delimited_cell|integer|min:0', 'multiselect_rules.*.delimiter' => 'required_if:multiselect_rules.*.representation,delimited_cell|string|min:1|max:5', 'multiselect_rules.*.options' => 'required_if:multiselect_rules.*.representation,option_columns|array|min:1', 'multiselect_rules.*.options.*.column_index' => 'required|integer|min:0', 'multiselect_rules.*.options.*.option_code' => 'required|string', 'multiselect_rules.*.selected_values' => 'required_if:multiselect_rules.*.representation,option_columns|array|min:1', 'multiselect_rules.*.unselected_values' => 'required_if:multiselect_rules.*.representation,option_columns|array|min:1', 'import_profile_id' => 'nullable|uuid|exists:import_profiles,id']);
 
         return Api::data($this->service->configure($import, $this->service->sheet($import, $sheet), $v));

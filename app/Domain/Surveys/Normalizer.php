@@ -81,8 +81,7 @@ class Normalizer
                 $valid = match ($f['id']) {
                     'T32','E00' => filter_var($value, FILTER_VALIDATE_EMAIL) !== false,
                     'T34' => filter_var($value, FILTER_VALIDATE_URL) !== false && in_array(strtolower(parse_url($value, PHP_URL_SCHEME) ?? ''), ['http', 'https']),
-                    default => (bool) preg_match('/^\+?[0-9 ()\-]{5,40}
-$/D', $value),
+                    default => (bool) preg_match('/^\+?[0-9 ()\-]{5,40}$/D', $value),
                 };
                 break;
             default:
