@@ -49,6 +49,28 @@ class ImportReviewTest extends TestCase
         $this->postJson("$url/validate", ['expected_configuration_revision' => 3])->assertOk()->assertJsonPath('data.counts.included_rows', 1)->assertJsonPath('data.counts.excluded_rows', 1005);
     }
 
+    public function test_review_identifies_file_rows_instead_of_database_ids_and_keeps_file_level_issues(): void
+    {
+        // An earlier import separates database identifiers from the CSV row numbers.
+        $this->prepared(1);
+        [$import, $run] = $this->prepared(2);
+        $url = "/api/v1/imports/$import";
+        $rows = $this->getJson("$url/validations/$run/rows?per_page=2")->assertOk()
+            ->assertJsonPath('meta.total', 3)->assertJsonPath('data.0.source_row_number', 2)
+            ->assertJsonPath('data.0.source_sheet_name', 'CSV')->json('data');
+        $this->assertNotSame(2, (int) $rows[0]['raw_row_id']);
+        $this->getJson("$url/validations/$run/rows?per_page=2&page=2")->assertOk()
+            ->assertJsonCount(1, 'data')->assertJsonPath('data.0.source_row_number', 4);
+        $this->getJson("$url/issues?validation_run_id=$run&field_id=T12")->assertOk()
+            ->assertJsonCount(2, 'data')->assertJsonPath('data.0.source_row_number', 2)
+            ->assertJsonPath('data.1.source_row_number', 3)->assertJsonPath('data.0.source_sheet_name', 'CSV');
+        QualityIssue::create(['import_id' => $import, 'validation_run_id' => $run,
+            'code' => 'file_level_notice', 'severity' => 'warning', 'message' => 'Incidencia sin fila específica']);
+        $this->getJson("$url/issues?validation_run_id=$run&code=file_level_notice")->assertOk()
+            ->assertJsonCount(1, 'data')->assertJsonPath('data.0.source_row_number', null)
+            ->assertJsonPath('data.0.source_sheet_name', null);
+    }
+
     public function test_counts_are_unique_rows_and_bulk_decisions_reject_wrong_scope_count_or_revision(): void
     {
         [$import, $run] = $this->prepared(2);

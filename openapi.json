@@ -9567,6 +9567,13 @@
           "raw_row_id": {
             "type": "string"
           },
+          "source_row_number": {
+            "type": "integer",
+            "description": "Fila del archivo original, desde 1; no es el identificador interno."
+          },
+          "source_sheet_name": {
+            "type": "string"
+          },
           "prepared_fields": {
             "type": "array",
             "items": {
@@ -9627,6 +9634,26 @@
             ]
           },
           "raw_row_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_row_number": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_sheet_name": {
             "anyOf": [
               {
                 "type": "string"

@@ -79,7 +79,14 @@ class ImportController extends Controller
     {
         ValidationRun::where('import_id', $import->id)->findOrFail($validation);
 
-        return Api::page(PreparedRow::where('validation_run_id', $validation)->orderBy('id'), $r, function ($row) use ($r) {
+        $query = PreparedRow::query()
+            ->join('raw_rows', 'raw_rows.id', '=', 'prepared_rows.raw_row_id')
+            ->join('import_sheets', 'import_sheets.id', '=', 'raw_rows.import_sheet_id')
+            ->where('prepared_rows.validation_run_id', $validation)
+            ->select('prepared_rows.*', 'raw_rows.row_number as source_row_number', 'import_sheets.name as source_sheet_name')
+            ->orderBy('prepared_rows.id');
+
+        return Api::page($query, $r, function ($row) use ($r) {
             $out = $row->toArray();
             if (! $r->user()->can_view_contacts) {
                 foreach ($out['prepared_fields'] as &$field) {
@@ -98,7 +105,13 @@ class ImportController extends Controller
         $v = $r->validate(['validation_run_id' => 'required|uuid'] + ImportReviewController::filterRules());
         ValidationRun::where('import_id', $import->id)->findOrFail($v['validation_run_id']);
 
-        return Api::page(ImportReviewController::filteredIssues($v['validation_run_id'], $v)->orderBy('id'), $r);
+        $query = ImportReviewController::filteredIssues($v['validation_run_id'], $v)
+            ->leftJoin('raw_rows', 'raw_rows.id', '=', 'quality_issues.raw_row_id')
+            ->leftJoin('import_sheets', 'import_sheets.id', '=', 'raw_rows.import_sheet_id')
+            ->select('quality_issues.*', 'raw_rows.row_number as source_row_number', 'import_sheets.name as source_sheet_name')
+            ->orderBy('quality_issues.id');
+
+        return Api::page($query, $r);
     }
 
     public function decisions(Request $r, SurveyImport $import)

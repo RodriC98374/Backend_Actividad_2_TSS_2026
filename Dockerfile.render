@@ -1,7 +1,7 @@
 FROM node:22-bookworm-slim AS frontend
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /frontend
-ARG FRONTEND_REF=5ed027c09934a4a8e35db1940485f27fd42c74a8
+ARG FRONTEND_REF=a60d04f0c195bb2aca7e9dba18b60f32676a758e
 RUN git init && git remote add origin https://github.com/RodriC98374/Frontend_Actividad_2_TSS_2026.git \
     && git fetch --depth=1 origin "$FRONTEND_REF" && git checkout --detach FETCH_HEAD
 RUN npm ci && npm run build

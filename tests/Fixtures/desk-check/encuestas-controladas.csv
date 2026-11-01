@@ -1,0 +1,13 @@
+ID,T03,T08,T12,X07
+P01,Sí,Sí,0,beca;recursos_propios
+P02,Sí,No,1,beca
+P03,No,Sí,2,recursos_propios
+P04,Sí,Sí,3,beca;beca
+P05,No,No,4,recursos_propios
+P06,Sí,Sí,5,beca;recursos_propios
+P07,No,Sí,6,recursos_propios
+P08,Sí,No,7,beca
+P09,Sí,,8,
+P10,No,,,beca
+P11,Sí,tal vez,-1,desconocido
+P12,Sí,Sí,99,beca

@@ -1,0 +1,903 @@
+{
+  "source_sha256": "12f502acdb7615ea3524c392a9042b0a9c8ba7fc828b401b11a6c5f10a3441e9",
+  "note": "Synthetic fixed example, not a representative random sample. Values calculated independently with Python standard library.",
+  "rows": [
+    {
+      "id": "P01",
+      "file_row": 2,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 0
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca",
+            "recursos_propios"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P02",
+      "file_row": 3,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": false
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 1
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P03",
+      "file_row": 4,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": false
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 2
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "recursos_propios"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P04",
+      "file_row": 5,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 3
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P05",
+      "file_row": 6,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": false
+        },
+        "T08": {
+          "state": "respondida",
+          "value": false
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 4
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "recursos_propios"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P06",
+      "file_row": 7,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 5
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca",
+            "recursos_propios"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P07",
+      "file_row": 8,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": false
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 6
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "recursos_propios"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P08",
+      "file_row": 9,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": false
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 7
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P09",
+      "file_row": 10,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "sin_respuesta",
+          "value": null
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 8
+        },
+        "X07": {
+          "state": "sin_respuesta",
+          "value": null
+        }
+      }
+    },
+    {
+      "id": "P10",
+      "file_row": 11,
+      "included": true,
+      "exclusion_reason": null,
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": false
+        },
+        "T08": {
+          "state": "sin_respuesta",
+          "value": null
+        },
+        "T12": {
+          "state": "sin_respuesta",
+          "value": null
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca"
+          ]
+        }
+      }
+    },
+    {
+      "id": "P11",
+      "file_row": 12,
+      "included": false,
+      "exclusion_reason": "Caso sintético con tres valores inválidos",
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "invalida",
+          "value": null
+        },
+        "T12": {
+          "state": "invalida",
+          "value": null
+        },
+        "X07": {
+          "state": "invalida",
+          "value": null
+        }
+      }
+    },
+    {
+      "id": "P12",
+      "file_row": 13,
+      "included": false,
+      "exclusion_reason": "Caso sintético fuera de la muestra acordada; exclusión manual, no automática",
+      "answers": {
+        "T03": {
+          "state": "respondida",
+          "value": true
+        },
+        "T08": {
+          "state": "respondida",
+          "value": true
+        },
+        "T12": {
+          "state": "respondida",
+          "value": 99
+        },
+        "X07": {
+          "state": "respondida",
+          "value": [
+            "beca"
+          ]
+        }
+      }
+    }
+  ],
+  "scenarios": {
+    "initial": {
+      "total_responses": 10,
+      "fields": {
+        "T03": {
+          "denominator": 10,
+          "states": {
+            "respondida": 10,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 6,
+              "percentage": 60.0
+            },
+            "no": {
+              "count": 4,
+              "percentage": 40.0
+            }
+          }
+        },
+        "T08": {
+          "denominator": 8,
+          "states": {
+            "respondida": 8,
+            "sin_respuesta": 2,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 5,
+              "percentage": 62.5
+            },
+            "no": {
+              "count": 3,
+              "percentage": 37.5
+            }
+          }
+        },
+        "T12": {
+          "denominator": 9,
+          "states": {
+            "respondida": 9,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "count": 9,
+          "mean": 4,
+          "min": 0,
+          "max": 8,
+          "sample_standard_deviation": 2.7386127875258306
+        },
+        "X07": {
+          "denominator": 9,
+          "states": {
+            "respondida": 9,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "recursos_propios": {
+              "count": 5,
+              "percentage": 55.56
+            },
+            "beca": {
+              "count": 6,
+              "percentage": 66.67
+            },
+            "credito": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "patrocinio_empresarial": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "por_definir": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        }
+      },
+      "crosstab": {
+        "denominator": 8,
+        "cells": {
+          "si/si": {
+            "count": 3,
+            "percentage": 37.5
+          },
+          "si/no": {
+            "count": 2,
+            "percentage": 25.0
+          },
+          "no/si": {
+            "count": 2,
+            "percentage": 25.0
+          },
+          "no/no": {
+            "count": 1,
+            "percentage": 12.5
+          }
+        }
+      }
+    },
+    "T03_yes": {
+      "total_responses": 6,
+      "fields": {
+        "T03": {
+          "denominator": 6,
+          "states": {
+            "respondida": 6,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 6,
+              "percentage": 100.0
+            },
+            "no": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        },
+        "T08": {
+          "denominator": 5,
+          "states": {
+            "respondida": 5,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 3,
+              "percentage": 60.0
+            },
+            "no": {
+              "count": 2,
+              "percentage": 40.0
+            }
+          }
+        },
+        "T12": {
+          "denominator": 6,
+          "states": {
+            "respondida": 6,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "count": 6,
+          "mean": 4,
+          "min": 0,
+          "max": 8,
+          "sample_standard_deviation": 3.2249030993194197
+        },
+        "X07": {
+          "denominator": 5,
+          "states": {
+            "respondida": 5,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "recursos_propios": {
+              "count": 2,
+              "percentage": 40.0
+            },
+            "beca": {
+              "count": 5,
+              "percentage": 100.0
+            },
+            "credito": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "patrocinio_empresarial": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "por_definir": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        }
+      },
+      "crosstab": {
+        "denominator": 5,
+        "cells": {
+          "si/si": {
+            "count": 3,
+            "percentage": 60.0
+          },
+          "si/no": {
+            "count": 2,
+            "percentage": 40.0
+          },
+          "no/si": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "no/no": {
+            "count": 0,
+            "percentage": 0.0
+          }
+        }
+      }
+    },
+    "corrected_P01_T12_2": {
+      "total_responses": 10,
+      "fields": {
+        "T03": {
+          "denominator": 10,
+          "states": {
+            "respondida": 10,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 6,
+              "percentage": 60.0
+            },
+            "no": {
+              "count": 4,
+              "percentage": 40.0
+            }
+          }
+        },
+        "T08": {
+          "denominator": 8,
+          "states": {
+            "respondida": 8,
+            "sin_respuesta": 2,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 5,
+              "percentage": 62.5
+            },
+            "no": {
+              "count": 3,
+              "percentage": 37.5
+            }
+          }
+        },
+        "T12": {
+          "denominator": 9,
+          "states": {
+            "respondida": 9,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "count": 9,
+          "mean": 4.222222222222222,
+          "min": 1,
+          "max": 8,
+          "sample_standard_deviation": 2.438123139721299
+        },
+        "X07": {
+          "denominator": 9,
+          "states": {
+            "respondida": 9,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "recursos_propios": {
+              "count": 5,
+              "percentage": 55.56
+            },
+            "beca": {
+              "count": 6,
+              "percentage": 66.67
+            },
+            "credito": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "patrocinio_empresarial": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "por_definir": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        }
+      },
+      "crosstab": {
+        "denominator": 8,
+        "cells": {
+          "si/si": {
+            "count": 3,
+            "percentage": 37.5
+          },
+          "si/no": {
+            "count": 2,
+            "percentage": 25.0
+          },
+          "no/si": {
+            "count": 2,
+            "percentage": 25.0
+          },
+          "no/no": {
+            "count": 1,
+            "percentage": 12.5
+          }
+        }
+      }
+    },
+    "excluded_P02_after_correction": {
+      "total_responses": 9,
+      "fields": {
+        "T03": {
+          "denominator": 9,
+          "states": {
+            "respondida": 9,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 5,
+              "percentage": 55.56
+            },
+            "no": {
+              "count": 4,
+              "percentage": 44.44
+            }
+          }
+        },
+        "T08": {
+          "denominator": 7,
+          "states": {
+            "respondida": 7,
+            "sin_respuesta": 2,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 5,
+              "percentage": 71.43
+            },
+            "no": {
+              "count": 2,
+              "percentage": 28.57
+            }
+          }
+        },
+        "T12": {
+          "denominator": 8,
+          "states": {
+            "respondida": 8,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "count": 8,
+          "mean": 4.625,
+          "min": 2,
+          "max": 8,
+          "sample_standard_deviation": 2.2638462845343543
+        },
+        "X07": {
+          "denominator": 8,
+          "states": {
+            "respondida": 8,
+            "sin_respuesta": 1,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "recursos_propios": {
+              "count": 5,
+              "percentage": 62.5
+            },
+            "beca": {
+              "count": 5,
+              "percentage": 62.5
+            },
+            "credito": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "patrocinio_empresarial": {
+              "count": 0,
+              "percentage": 0.0
+            },
+            "por_definir": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        }
+      },
+      "crosstab": {
+        "denominator": 7,
+        "cells": {
+          "si/si": {
+            "count": 3,
+            "percentage": 42.86
+          },
+          "si/no": {
+            "count": 1,
+            "percentage": 14.29
+          },
+          "no/si": {
+            "count": 2,
+            "percentage": 28.57
+          },
+          "no/no": {
+            "count": 1,
+            "percentage": 14.29
+          }
+        }
+      }
+    },
+    "empty": {
+      "total_responses": 0,
+      "fields": {
+        "T03": {
+          "denominator": 0,
+          "states": {
+            "respondida": 0,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 0,
+              "percentage": null
+            },
+            "no": {
+              "count": 0,
+              "percentage": null
+            }
+          }
+        },
+        "T08": {
+          "denominator": 0,
+          "states": {
+            "respondida": 0,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "si": {
+              "count": 0,
+              "percentage": null
+            },
+            "no": {
+              "count": 0,
+              "percentage": null
+            }
+          }
+        },
+        "T12": {
+          "denominator": 0,
+          "states": {
+            "respondida": 0,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "count": 0,
+          "mean": null,
+          "min": null,
+          "max": null,
+          "sample_standard_deviation": null
+        },
+        "X07": {
+          "denominator": 0,
+          "states": {
+            "respondida": 0,
+            "sin_respuesta": 0,
+            "no_aplica": 0,
+            "indeterminada": 0,
+            "invalida": 0,
+            "no_disponible": 0
+          },
+          "items": {
+            "recursos_propios": {
+              "count": 0,
+              "percentage": null
+            },
+            "beca": {
+              "count": 0,
+              "percentage": null
+            },
+            "credito": {
+              "count": 0,
+              "percentage": null
+            },
+            "patrocinio_empresarial": {
+              "count": 0,
+              "percentage": null
+            },
+            "por_definir": {
+              "count": 0,
+              "percentage": null
+            }
+          }
+        }
+      },
+      "crosstab": {
+        "denominator": 0,
+        "cells": {
+          "si/si": {
+            "count": 0,
+            "percentage": null
+          },
+          "si/no": {
+            "count": 0,
+            "percentage": null
+          },
+          "no/si": {
+            "count": 0,
+            "percentage": null
+          },
+          "no/no": {
+            "count": 0,
+            "percentage": null
+          }
+        }
+      }
+    }
+  }
+}
